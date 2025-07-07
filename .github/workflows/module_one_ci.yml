@@ -1,4 +1,4 @@
-name: Module One Build
+name: Module One CI
 
 on:
   pull_request:
