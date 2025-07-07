@@ -3,7 +3,7 @@ name: Module One CD
 on:
   push:
     branches: [ "main" ]
-    paths: [ "/module_one/**" ]
+    paths: [ "module_one/**" ]
   workflow_dispatch:
 
 jobs:
