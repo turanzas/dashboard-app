@@ -1,4 +1,4 @@
-name: release
+name: Deployment
 
 on:
   push:
@@ -13,4 +13,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run a one-line script
-        run: echo This is a release for the main branch
+        run: echo This is a deployment for the main infraestructure
