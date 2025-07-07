@@ -2,9 +2,7 @@ name: Module One CI
 
 on:
   pull_request:
-    paths:
-      - 'module_one/**'
-
+    paths: [ "module_one/**" ]
   workflow_dispatch:
 
 jobs:
