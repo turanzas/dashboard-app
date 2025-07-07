@@ -3,6 +3,7 @@ name: release
 on:
   push:
     branches: [ "main" ]
+    paths: [ '/infraestructure/**' ]
 
   workflow_dispatch:
 
