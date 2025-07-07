@@ -1,0 +1,15 @@
+name: Module One CD
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: [ "/module_one/**" ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run a one-line script
+        run: echo Module One - Build image - Docker push - Service rollout
