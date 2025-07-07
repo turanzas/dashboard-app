@@ -1,0 +1,16 @@
+name: Module One Build
+
+on:
+  pull_request:
+    paths:
+      - 'module_one/**'
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run a one-line script
+        run: echo Build / SonarQube / Test Module One
