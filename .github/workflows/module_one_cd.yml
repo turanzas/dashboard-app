@@ -8,8 +8,16 @@ on:
 
 jobs:
   deploy:
+    name: Deploy Module One
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Run a one-line script
-        run: echo Module One - Build image - Docker push - Service rollout
+      - name: Build docker image
+        run: cd module_one && docker build -t turanzas/dashboard-app-module-one .
+      - name: Login into docker
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push the image
+        run: docker push turanzas/dashboard-app-module-one
