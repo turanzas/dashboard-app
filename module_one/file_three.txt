@@ -1,2 +1,0 @@
-This is file three in module one
-And it is going to generate a release
