@@ -9,8 +9,8 @@ This application will provide:
 
 ### Branch Protection
 
-As the main branch "main" will be used for generating releases, this branch must be always in a deployable state, which will be achive by:
-- Branch protection rules. Not allowing direct pushes. require up to date branches in Github before merging
+As the main branch "master" will be used for generating releases, this branch must be always in a deployable state, which will be achived by:
+- Branch protection rules. Not allowing direct pushes. require up to date branches in pull requests before merging
 - Linting. SonarQube Scan (https://sonarcloud.io/project/configuration?id=turanzas_dashboard-app)
 
 ### Development
@@ -27,7 +27,7 @@ As the main branch "main" will be used for generating releases, this branch must
 - Building image
 - Ship image to registry
 
-### Fully automated version management and package publishing
+## Fully automated version management and package publishing
 
 semantic-release automates the whole package release workflow including: determining the next version number, generating the release notes, and publishing the package.
 
