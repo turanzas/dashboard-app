@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: "config-server"
+  profiles:
+    active: git
+  cloud:
+    config:
+      server:
+        git:
+          uri: "https://github.com/turanzas/dashboard-app.git"
+          default-label: "main"
+          timeout: 5000
+          clone-on-start: true
+          force-pull: true
+          search-paths:
+            - "config-files"
+
+server:
+  port: 8071
