@@ -54,4 +54,4 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-jib.to.image = "turanzas/financial-entity"
+jib.to.image = "turanzas/financial-entity:${project.version}"
