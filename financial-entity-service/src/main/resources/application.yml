@@ -2,7 +2,7 @@ spring:
   application:
     name: "financial-entity"
   config:
-    import: "optional:configserver:http://localhost:8071/"
+    import: "optional:configserver:http://localhost:8070/"
 
 management:
   endpoints:
