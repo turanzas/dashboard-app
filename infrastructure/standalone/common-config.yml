@@ -1,0 +1,54 @@
+services:
+  service-backend-network:
+    networks:
+      - backend
+
+  service-backend-base:
+    extends:
+      service: service-backend-network
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+
+  service-backend-config-client:
+    extends:
+      service: service-backend-base
+    depends_on:
+      config-server:
+        condition: service_healthy
+    environment:
+      SPRING_CONFIG_IMPORT: configserver:http://config-server:8070/
+
+  service-backend-discovery-client:
+    extends:
+      service: service-backend-config-client
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8071/eureka/
+
+  service-backend:
+    extends:
+      service: service-backend-discovery-client
+    depends_on:
+      discovery-server:
+        condition: service_healthy
+
+  service-backend-with-sql:
+    extends:
+      service: service-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - data
+
+  service-backend-with-nosql:
+    extends:
+      service: service-backend
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - data

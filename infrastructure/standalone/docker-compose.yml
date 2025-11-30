@@ -1,0 +1,123 @@
+name: dashboard-app
+
+services:
+
+  # Data Layer
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    shm_size: 128mb # set shared memory limit when using docker compose
+    healthcheck:
+      test: ["CMD", "sh", "-c", "pg_isready -U postgres && psql -U postgres -c 'SELECT 1'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    environment:
+      POSTGRES_PASSWORD: S3cretP@ssword
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql
+    networks:
+      - data
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - "8074:8080"
+    depends_on:
+      - postgres
+    networks:
+      - data
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./volumes/mongodb/data:/data/db
+    networks:
+      - data
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - "8073:8081"
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: ""
+      ME_CONFIG_MONGODB_URL: mongodb://mongodb:27017
+    depends_on:
+      - mongodb
+    networks:
+      - data
+
+  # Orchestration Layer
+  config-server:
+    image: turanzas/config-server:1.0.0
+    container_name: config-server
+    ports:
+      - "8070:8070"
+    healthcheck:
+      test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: service-backend-base
+
+  discovery-server:
+    image: "turanzas/eureka-server:1.0.0"
+    container_name: discovery-server
+    ports:
+      - "8071:8071"
+    healthcheck:
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: service-backend-discovery-client
+
+  api-gateway-server:
+    image: turanzas/api-gateway-server:1.0.0
+    container_name: api-gateway-server
+    ports:
+      - "8072:8072"
+    healthcheck:
+      test: "curl --fail --silent localhost:8072/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: service-backend
+
+  # Backend Layer
+  financial-entity:
+    image: turanzas/financial-entity:1.0.0
+    container_name: financial-entity
+    ports:
+      - "8080:8080"
+    extends:
+      file: common-config.yml
+      service: service-backend-with-sql
+
+networks:
+  data:
+    name: data
+    driver: bridge
+  backend:
+    name: backend
+    driver: bridge
