@@ -1,20 +1,11 @@
 spring:
   application:
-    name: "financial-entity"
+    name: financial-entity-service
+  profiles:
+    default: dev
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: "always"
-    shutdown:
-      access: unrestricted
-  info:
-    env:
-      enabled: true
+server:
+  port: 8080
 
 info:
   app:
