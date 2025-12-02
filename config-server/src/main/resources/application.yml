@@ -1,19 +1,11 @@
-server:
-  port: 8070
-
 spring:
   application:
-    name: "config-server"
+    name: config-server
   profiles:
-    active: git
-  cloud:
-    config:
-      server:
-        git:
-          uri: "https://github.com/turanzas/dashboard-app.git"
-          default-label: "main"
-          timeout: 5000
-          clone-on-start: true
-          force-pull: true
-          search-paths:
-            - "config-files"
+    default: dev
+    group:
+      dev: dev, native
+      prod: prod, git
+
+server:
+  port: 8070
