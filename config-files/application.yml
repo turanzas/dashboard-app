@@ -1,0 +1,21 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    show-details: "always"
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+    shutdown:
+      access: unrestricted
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+info:
+  env:
+    enabled: true
