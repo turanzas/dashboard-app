@@ -7,7 +7,7 @@ services:
     extends:
       service: service-backend-network
     environment:
-      SPRING_PROFILES_ACTIVE: default
+      SPRING_PROFILES_ACTIVE: prod
     deploy:
       resources:
         limits:
@@ -20,7 +20,7 @@ services:
       config-server:
         condition: service_healthy
     environment:
-      SPRING_CONFIG_IMPORT: configserver:http://config-server:8070/
+      SPRING_CONFIG_IMPORT: "optional:configserver:http://config-server:8070/"
 
   service-backend-discovery-client:
     extends:
