@@ -1,18 +1,8 @@
 spring:
   application:
-    name: "eureka-server"
+    name: eureka-server
+  profiles:
+    default: dev
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  health:
-    readiness-state:
-      enabled: true
-    liveness-state:
-      enabled: true
-  endpoint:
-    health:
-      probes:
-        enabled: true
+server:
+  port: 8071
