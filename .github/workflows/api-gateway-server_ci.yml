@@ -42,4 +42,4 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
       - name: Build with Gradle Wrapper
-        run: cd api-gateway-server && ./gradlew test
+        run: cd api-gateway-server && ./gradlew test -Dspring.profiles.active=test
