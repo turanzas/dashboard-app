@@ -1,4 +1,4 @@
-package com.loptur.admin.financialEntity
+package com.loptur.financialEntity
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class FinancialEntityApplication
 
 fun main(args: Array<String>) {
-	runApplication<FinancialEntityApplication>(*args)
+    runApplication<FinancialEntityApplication>(*args)
 }

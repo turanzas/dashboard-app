@@ -4,6 +4,7 @@ plugins {
 	id("org.springframework.boot") version "4.0.0"
 	id("io.spring.dependency-management") version "1.1.7"
     id("com.google.cloud.tools.jib") version "3.5.1" // docker image generation
+    id("org.sonarqube") version "7.1.0.6387"
 }
 
 group = "com.loptur"
@@ -36,6 +37,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("org.assertj:assertj-core:3.27.6")
 }
 
 dependencyManagement {
@@ -52,6 +54,16 @@ kotlin {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "turanzas_dashboard-app")
+        property("sonar.projectName", "Dashboard App")
+        property("sonar.organization", "turanzas")
+        property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.token", System.getenv("SONAR_TOKEN"))
+    }
 }
 
 jib.to.image = "turanzas/financial-entity:${project.version}"
