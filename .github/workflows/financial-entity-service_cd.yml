@@ -8,21 +8,23 @@ on:
 
 jobs:
   deploy:
-    name: Deploy Config Server
+    name: Update Image API Gateway Server
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v6
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Login into docker
-        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          cache: 'gradle'
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
-      - name: Build with Gradle Wrapper
+        uses: gradle/actions/setup-gradle@v5
+      - name: Build image with Gradle Jib
         run: cd financial-entity-service && ./gradlew jib
