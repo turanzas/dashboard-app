@@ -4,7 +4,6 @@ plugins {
 	id("org.springframework.boot") version "4.0.0"
 	id("io.spring.dependency-management") version "1.1.7"
     id("com.google.cloud.tools.jib") version "3.5.1" // docker image generation
-    id("org.sonarqube") version "7.1.0.6387"
 }
 
 group = "com.loptur"
@@ -55,16 +54,6 @@ kotlin {
 tasks.withType<Test> {
 	useJUnitPlatform()
     systemProperty("spring.profiles.active", "test")
-}
-
-sonar {
-    properties {
-        property("sonar.projectKey", "turanzas_dashboard-app")
-        property("sonar.projectName", "Dashboard App")
-        property("sonar.organization", "turanzas")
-        property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.token", System.getenv("SONAR_TOKEN"))
-    }
 }
 
 jib.to.image = "turanzas/financial-entity:${project.version}"
