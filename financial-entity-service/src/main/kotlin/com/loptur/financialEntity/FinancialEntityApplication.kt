@@ -1,4 +1,4 @@
-package com.loptur.admin.financialEntity
+package com.loptur.financialEntity
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

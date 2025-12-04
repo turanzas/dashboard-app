@@ -1,4 +1,4 @@
-package com.loptur.admin.financialEntity
+package com.loptur.financialEntity
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
