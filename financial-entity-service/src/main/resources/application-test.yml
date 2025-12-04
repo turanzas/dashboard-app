@@ -1,0 +1,14 @@
+spring:
+  config:
+    import: "optional:configserver:"
+    enabled: false
+  cloud:
+    discovery:
+      enabled: false
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    fetchRegistry: false
+    registerWithEureka: false
