@@ -1,9 +1,8 @@
 name: Dashboard App SonarQube Analysis
 
 on:
-  pull_request:
-    branches:
-      - main
+  push:
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
