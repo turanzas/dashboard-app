@@ -33,10 +33,14 @@ dependencies {
     /* SPRING CLOUD EUREKA CLIENT */
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     /* TESTING */
-	testImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-test-autoconfigure")
+    testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
     testImplementation("org.assertj:assertj-core:3.27.6")
+    testImplementation("com.ninja-squad:springmockk:5.0.1")
 }
 
 dependencyManagement {
@@ -53,7 +57,6 @@ kotlin {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
-    systemProperty("spring.profiles.active", "test")
 }
 
 jib.to.image = "turanzas/financial-entity:${project.version}"
