@@ -1,8 +1,11 @@
 spring:
   config:
     import: "optional:configserver:"
-    enabled: false
   cloud:
+    config:
+      enabled: false
+      discovery:
+        enabled: false
     discovery:
       enabled: false
 
