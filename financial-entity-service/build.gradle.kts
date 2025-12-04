@@ -52,6 +52,7 @@ kotlin {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+    systemProperty("spring.profiles.active", "test")
 }
 
 jib.to.image = "turanzas/financial-entity:${project.version}"
