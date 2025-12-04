@@ -1,0 +1,27 @@
+name: Dashboard App SonarQube Analysis
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: SonarQube Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+      - name: SonarQube Analysis
+        run: ./gradlew sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}

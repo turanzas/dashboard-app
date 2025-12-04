@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build and SonarQube Analysis
+    name: Build
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -23,7 +23,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
       - name: Build with Gradle Wrapper
-        run: cd api-gateway-server && ./gradlew build -x test sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        run: cd api-gateway-server && ./gradlew :build -x test
   test:
     name: Unit Tests
     needs: [ build ]
@@ -41,5 +41,5 @@ jobs:
           cache: 'gradle'
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
-      - name: Build with Gradle Wrapper
-        run: cd api-gateway-server && ./gradlew test -Dspring.profiles.active=test
+      - name: Test with Gradle Wrapper
+        run: cd api-gateway-server && ./gradlew :test
