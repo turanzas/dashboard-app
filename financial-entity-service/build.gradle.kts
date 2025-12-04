@@ -36,6 +36,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("org.assertj:assertj-core:3.27.6")
 }
 
 dependencyManagement {
