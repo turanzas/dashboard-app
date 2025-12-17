@@ -1,9 +1,9 @@
 plugins {
-	kotlin("jvm") version "2.2.21"
-	kotlin("plugin.spring") version "2.2.21"
-	id("org.springframework.boot") version "4.0.0"
-	id("io.spring.dependency-management") version "1.1.7"
-    id("com.google.cloud.tools.jib") version "3.5.1" // docker image generation
+    kotlin("jvm") version "2.2.21"
+    kotlin("plugin.spring") version "2.2.21"
+    id("org.springframework.boot") version "4.0.0"
+    id("io.spring.dependency-management") version "1.1.7"
+    id("com.google.cloud.tools.jib") version "3.5.1"
 }
 
 group = "com.loptur"
@@ -20,7 +20,9 @@ repositories {
 	mavenCentral()
 }
 
-extra["springCloudVersion"] = "2025.1.0"
+extra["springCloudVersion"] = "2025.1.0" // Oakwood
+extra["assertjVersion"] = "3.27.6"
+extra["springMockkVersion"] = "5.0.1"
 
 dependencies {
     /* KOTLIN */
@@ -39,8 +41,8 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-test-autoconfigure")
     testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
     testImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
-    testImplementation("org.assertj:assertj-core:3.27.6")
-    testImplementation("com.ninja-squad:springmockk:5.0.1")
+    testImplementation("org.assertj:assertj-core:${property("assertjVersion")}")
+    testImplementation("com.ninja-squad:springmockk:${property("springMockkVersion")}")
 }
 
 dependencyManagement {
@@ -57,6 +59,10 @@ kotlin {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+springBoot {
+    buildInfo() // spring boot actuator’s info endpoint
 }
 
 jib.to.image = "turanzas/financial-entity:${project.version}"

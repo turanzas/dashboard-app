@@ -3,8 +3,7 @@ plugins {
 	kotlin("plugin.spring") version "2.2.21"
 	id("org.springframework.boot") version "4.0.0"
 	id("io.spring.dependency-management") version "1.1.7"
-    id("com.google.cloud.tools.jib") version "3.5.1" // docker image generation
-    id("org.sonarqube") version "7.1.0.6387"
+    id("com.google.cloud.tools.jib") version "3.5.1"
 }
 
 group = "com.loptur"
@@ -34,7 +33,7 @@ dependencies {
     /* SPRING CLOUD EUREKA CLIENT */
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     /* SPRING CLOUD GATEWAY */
-	implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webmvc")
+	implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webflux")
     /* TESTING */
 	testImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
@@ -57,14 +56,8 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-sonar {
-    properties {
-        property("sonar.projectKey", "turanzas_dashboard-app")
-        property("sonar.projectName", "Dashboard App")
-        property("sonar.organization", "turanzas")
-        property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.token", System.getenv("SONAR_TOKEN"))
-    }
+springBoot {
+    buildInfo() // spring boot actuator’s info endpoint
 }
 
 jib.to.image = "turanzas/api-gateway-server:${project.version}"
