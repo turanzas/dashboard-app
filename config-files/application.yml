@@ -1,20 +1,39 @@
+spring:
+  cloud:
+    loadbalancer:
+      cache:
+        ttl: 1s
+      ribbon: # Spring Cloud Ribbon is in maintenance mode
+        enabled: false # used by default, disabled to use spring cloud gateway load balancer
+  jackson: # Pretty-print JSON responses
+    serialization:
+      indent_output: true
+  output:
+    ansi:
+      enabled: ALWAYS
+
 management:
   endpoints:
     web:
       exposure:
         include: "*"
   health:
-    show-details: "always"
-    readiness-state:
-      enabled: true
-    liveness-state:
-      enabled: true
     shutdown:
       access: unrestricted
   endpoint:
     health:
-      probes:
-        enabled: true
+      show-details: always
+
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 10 # sends a heartbeat to the server every Xs
+    lease-expiration-duration-in-seconds: 30 # server removes this app if it not receives a heartbeat after Xs
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8071/eureka/
 
 info:
   env:

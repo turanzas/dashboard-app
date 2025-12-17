@@ -3,14 +3,33 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true # locates services registered with eureka and creates routes for them
+          enabled: false # locates services registered with eureka and creates routes for them
           lower-case-service-id: true
+      server:
+        webflux:
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowed-origins: "*" # adjust for production use
+                allowed-methods:
+                  - OPTIONS
+                  - GET
+                  - HEAD
+                  - POST
+                  - DELETE
+                  - PUT
+                  - PATCH
+                allowed-headers:
+                  - "*"
+                max-age: 1800
+          routes:
+            - id: financial-entity-service
+              uri: lb://financial-entity-service
+              predicates:
+                - Path=/api/financial-entities/**
+              filters:
+                - StripPrefix=1
 
 eureka:
-  instance:
-    preferIpAddress: true
   client:
-    fetchRegistry: true
-    registerWithEureka: true
-    serviceUrl:
-      defaultZone: http://localhost:8071/eureka/
+    registry-fetch-interval-seconds: 5 # together with loadbalancer.cache.ttl
