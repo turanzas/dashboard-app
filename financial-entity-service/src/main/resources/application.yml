@@ -1,14 +1,13 @@
 spring:
   application:
     name: financial-entity-service
+  mvc:
+    apiversion:
+      default: v1
+      use:
+        header: api-version
   profiles:
     default: dev
 
 server:
   port: 8080
-
-info:
-  app:
-    name: "${spring.application.name}"
-    description: "Financial Entity Service"
-    version: "1.0.0"

@@ -35,7 +35,9 @@ class FinancialEntityControllerTest(@Autowired val mockMvc: MockMvc) {
                 FinancialEntity(FinancialEntityId(UUID.randomUUID()), "Entity 2")
             )
             // when
-            findAll = mockMvc.get("/financial-entities")
+            findAll = mockMvc.get("/financial-entities") {
+                header("api-version", "v1")
+            }
         }
 
         @Test
@@ -68,7 +70,7 @@ class FinancialEntityControllerTest(@Autowired val mockMvc: MockMvc) {
             every { financialEntityRepository.findAll() } returns emptyList()
 
             // when & then
-            mockMvc.get("/financial-entities")
+            mockMvc.get("/financial-entities") { header("api-version", "v1") }
                 .andExpect {
                     status { isOk() }
                     jsonPath("$.length()") { value(0) }

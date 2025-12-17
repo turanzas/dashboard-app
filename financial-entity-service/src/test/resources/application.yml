@@ -8,6 +8,11 @@ spring:
         enabled: false
     discovery:
       enabled: false
+  mvc:
+    apiversion:
+      default: v1
+      use:
+        header: api-version
 
 eureka:
   instance:
