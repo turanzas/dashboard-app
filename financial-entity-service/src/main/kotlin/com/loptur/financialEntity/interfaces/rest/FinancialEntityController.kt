@@ -12,7 +12,7 @@ final class FinancialEntityController(
     private val financialEntityRepository: FinancialEntityRepository
 ) {
 
-    @GetMapping
+    @GetMapping(version = "v1+")
     fun findAll(): List<FinancialEntity> = financialEntityRepository.findAll()
 
 }
