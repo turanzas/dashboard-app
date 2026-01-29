@@ -35,20 +35,11 @@ services:
       discovery-server:
         condition: service_healthy
 
-  service-backend-with-sql:
+  service-backend-with-data:
     extends:
       service: service-backend
     depends_on:
       postgres:
-        condition: service_healthy
-    networks:
-      - data
-
-  service-backend-with-nosql:
-    extends:
-      service: service-backend
-    depends_on:
-      mongodb:
         condition: service_healthy
     networks:
       - data
