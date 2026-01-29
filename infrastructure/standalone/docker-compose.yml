@@ -3,6 +3,8 @@ name: dashboard-app
 services:
 
   # Data Layer
+
+  ## SQL Database
   postgres:
     image: postgres
     container_name: postgres
@@ -17,11 +19,15 @@ services:
       retries: 5
       start_period: 10s
     environment:
-      POSTGRES_PASSWORD: S3cretP@ssword
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - ./volumes/postgres:/var/lib/postgresql
+      - ./configuration/postgres:/docker-entrypoint-initdb.d/
     networks:
       - data
+      - keycloak
+
+  ## Postgres Admin Tool
   adminer:
     image: adminer
     container_name: adminer
@@ -33,6 +39,7 @@ services:
     networks:
       - data
 
+  ## NoSQL Database
   mongodb:
     image: mongo
     container_name: mongodb
@@ -44,6 +51,7 @@ services:
     networks:
       - data
 
+  ## MongoDB Admin Tool
   mongo-express:
     image: mongo-express
     container_name: mongo-express
@@ -58,7 +66,39 @@ services:
     networks:
       - data
 
+  # Security Layer
+
+  ## Keycloak Server
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.4.7
+    container_name: keycloak
+    restart: always
+    command: ["start-dev"]
+    depends_on:
+      - postgres
+    ports:
+      - "7080:8080"
+    environment:
+      KC_HOSTNAME: localhost
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_ADMIN_USER}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_ADMIN_PASSWORD}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/${KC_POSTGRES_DB}
+      KC_DB_USERNAME: ${POSTGRES_USER}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KC_HEALTH_ENABLED: "true"
+      KC_LOG_LEVEL: info
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:7080/health/ready" ]
+      interval: 15s
+      timeout: 2s
+      retries: 15
+    networks:
+      - keycloak
+
   # Orchestration Layer
+
+  ## Configuration Server
   config-server:
     image: turanzas/config-server:1.0.0
     container_name: config-server
@@ -74,6 +114,7 @@ services:
       file: common-config.yml
       service: service-backend-base
 
+  ## Discovery Server
   discovery-server:
     image: "turanzas/eureka-server:1.0.0"
     container_name: discovery-server
@@ -89,6 +130,7 @@ services:
       file: common-config.yml
       service: service-backend-discovery-client
 
+  ## API Gateway Server
   api-gateway-server:
     image: turanzas/api-gateway-server:1.0.0
     container_name: api-gateway-server
@@ -100,19 +142,34 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    environment:
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI: http://keycloak:8080/realms/dashboard-development/protocol/openid-connect/certs
+    depends_on:
+      financial-entity:
+        condition: service_healthy
+    networks:
+      - keycloak
     extends:
       file: common-config.yml
       service: service-backend
 
   # Backend Layer
+
+  ## Financial Entity Service
   financial-entity:
     image: turanzas/financial-entity:1.0.0
     container_name: financial-entity
     ports:
-      - "8080:8080"
+      - "8080:8080" # only for testing purposes
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     extends:
       file: common-config.yml
-      service: service-backend-with-sql
+      service: service-backend-with-data
 
 networks:
   data:
@@ -120,4 +177,7 @@ networks:
     driver: bridge
   backend:
     name: backend
+    driver: bridge
+  keycloak:
+    name: keycloak
     driver: bridge

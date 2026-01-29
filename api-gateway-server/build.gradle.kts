@@ -34,6 +34,9 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     /* SPRING CLOUD GATEWAY */
 	implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webflux")
+    /* SECURITY */
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-security-oauth2-resource-server")
     /* TESTING */
 	testImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
