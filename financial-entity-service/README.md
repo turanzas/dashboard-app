@@ -21,8 +21,12 @@ curl -X POST http://localhost:8080/actuator/shutdown
 ```
 
 ### Financial Entity API
-The Financial Entity API provides endpoints to manage financial entities. Below are the available endpoints:
+The Financial Entity API provides endpoints to manage financial entities.
 
+Documentation:
+http://localhost:8080/swagger-ui/index.html
+
+Below are the available endpoints:
 - `GET /financial-entities`: Retrieve a list of all financial entities.
     ```shell
     curl -X GET http://localhost:8080/financial-entities
