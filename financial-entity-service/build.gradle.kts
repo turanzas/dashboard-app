@@ -20,9 +20,10 @@ repositories {
 	mavenCentral()
 }
 
-extra["springCloudVersion"] = "2025.1.0" // Oakwood
+extra["springCloudVersion"] = "2025.1.1" // Oakwood
 extra["assertjVersion"] = "3.27.6"
 extra["springMockkVersion"] = "5.0.1"
+extra["openApiVersion"] = "3.0.1"
 
 dependencies {
     /* KOTLIN */
@@ -34,6 +35,8 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-starter-config")
     /* SPRING CLOUD EUREKA CLIENT */
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+    /* API DOCUMENTATION */
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${property("openApiVersion")}")
     /* TESTING */
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
