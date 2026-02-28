@@ -11,14 +11,19 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>service-financial-entity</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>financial-entity-domain-model</artifactId>
 
-    <modules>
-        <module>financial-entity-container</module>
-        <module>financial-entity-core</module>
-        <module>financial-entity-infrastructure</module>
-        <module>financial-entity-user-interface</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ninja-squad</groupId>
+            <artifactId>springmockk</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>

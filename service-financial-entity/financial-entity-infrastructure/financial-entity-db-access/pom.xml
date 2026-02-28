@@ -11,14 +11,6 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>service-financial-entity</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>financial-entity-container</module>
-        <module>financial-entity-core</module>
-        <module>financial-entity-infrastructure</module>
-        <module>financial-entity-user-interface</module>
-    </modules>
+    <artifactId>financial-entity-db-access</artifactId>
 
 </project>

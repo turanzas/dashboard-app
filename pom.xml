@@ -18,12 +18,14 @@
     <packaging>pom</packaging>
 
     <modules>
+        <!-- SERVER MODULES -->
         <module>api-gateway-server</module>
         <module>config-server</module>
         <module>eureka-server</module>
-        <module>service-financial-entity</module>
-        <module>service-account</module>
+        <!-- SERVICE MODULES -->
         <module>service-common</module>
+        <module>service-account</module>
+        <module>service-financial-entity</module>
     </modules>
 
     <properties>
@@ -33,6 +35,7 @@
         <spring-cloud.version>2025.1.1</spring-cloud.version>
         <jib-maven-plugin.version>3.3.1</jib-maven-plugin.version>
         <depgraph-maven-plugin.version>4.0.3</depgraph-maven-plugin.version>
+        <springmockk.version>5.0.1</springmockk.version>
     </properties>
 
     <repositories>
@@ -55,6 +58,13 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- TEST DEPENDENCIES -->
+            <dependency>
+                <groupId>com.ninja-squad</groupId>
+                <artifactId>springmockk</artifactId>
+                <version>${springmockk.version}</version>
+                <scope>test</scope>
             </dependency>
             <!-- DASHBOARD-APP -->
             <dependency>
@@ -81,7 +91,27 @@
             <!-- SERVICE-FINANCIAL-ENTITY -->
             <dependency>
                 <groupId>com.dashboard.app</groupId>
-                <artifactId>service-financial-entity</artifactId>
+                <artifactId>financial-entity-application-services</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>financial-entity-domain-services</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>financial-entity-domain-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>financial-entity-db-access</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>financial-entity-rest-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- SERVICE-ACCOUNT -->
@@ -119,6 +149,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
