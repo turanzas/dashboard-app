@@ -13,4 +13,12 @@
 
     <artifactId>financial-entity-db-access</artifactId>
 
+    <dependencies>
+        <!-- DASHBOARD-APP -->
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>financial-entity-application-services</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
