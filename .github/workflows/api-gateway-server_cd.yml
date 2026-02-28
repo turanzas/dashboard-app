@@ -25,4 +25,4 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build image with Jib
-        run: cd api-gateway-server && ./mvn jib:build -DskipTests
+        run: cd api-gateway-server && mvn jib:build -DskipTests

@@ -20,8 +20,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: 'maven'
-      - name: Build with Gradle Wrapper
-        run: cd api-gateway-server && ./mvn clean install -DskipTests
+      - name: Build with Maven
+        run: cd api-gateway-server && mvn clean install -DskipTests
   test:
     name: Unit Tests
     needs: [ build ]
@@ -37,5 +37,5 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: 'maven'
-      - name: Test with Gradle Wrapper
-        run: cd api-gateway-server && ./mvn test
+      - name: Test with Maven
+        run: cd api-gateway-server && mvn test
