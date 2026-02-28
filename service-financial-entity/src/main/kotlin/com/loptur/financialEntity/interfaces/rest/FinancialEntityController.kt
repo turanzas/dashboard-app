@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/financial-entities")
-final class FinancialEntityController(
+class FinancialEntityController(
     private val financialEntityRepository: FinancialEntityRepository
 ) {
 

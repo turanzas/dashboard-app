@@ -3,7 +3,7 @@ name: Financial Entity Service CD
 on:
   push:
     branches: [ "main" ]
-    paths: [ "financial-entity-service/**" ]
+    paths: [ "service-financial-entity/**" ]
   workflow_dispatch:
 
 jobs:
@@ -25,4 +25,4 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build image with Jib
-        run: cd financial-entity-service && mvn jib:build -DskipTests
+        run: cd service-financial-entity && mvn jib:build -DskipTests

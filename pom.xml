@@ -21,7 +21,7 @@
         <module>api-gateway-server</module>
         <module>config-server</module>
         <module>eureka-server</module>
-        <module>financial-entity-service</module>
+        <module>service-financial-entity</module>
         <module>service-account</module>
         <module>service-common</module>
     </modules>
@@ -78,10 +78,10 @@
                 <artifactId>common-domain-model</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!-- FINANCIAL-ENTITY-SERVICE -->
+            <!-- SERVICE-FINANCIAL-ENTITY -->
             <dependency>
                 <groupId>com.dashboard.app</groupId>
-                <artifactId>financial-entity-server</artifactId>
+                <artifactId>service-financial-entity</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- SERVICE-ACCOUNT -->

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository
 
 
 @Repository
-final class FinancialEntityRepositoryInMemory(private val financialEntities: MutableList<FinancialEntity> = mutableListOf()) : FinancialEntityRepository {
+class FinancialEntityRepositoryInMemory(private val financialEntities: MutableList<FinancialEntity> = mutableListOf()) : FinancialEntityRepository {
 
     override fun findById(id: FinancialEntityId): FinancialEntity? = financialEntities.find { it.id == id }
 

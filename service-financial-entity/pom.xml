@@ -11,7 +11,7 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>financial-entity-service</artifactId>
+    <artifactId>service-financial-entity</artifactId>
 
     <dependencies>
         <!-- SPRING BOOT -->

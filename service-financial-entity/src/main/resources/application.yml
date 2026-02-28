@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: financial-entity-service
+  mvc:
+    apiversion: #Api version strategy
+       strategy: HEADER
+       header:
+         name: api-version
+         default: v1
+  profiles:
+    default: dev
+
+server:
+  port: 8080
