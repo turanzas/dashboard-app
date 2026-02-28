@@ -15,7 +15,7 @@ It provides a centralized way to store, retrieve, and update configuration setti
 ### Docker
 - **Build the Docker Image**
   ```bash
-  ./gradlew jib
+  mvn clean install jib:build
   ```
 
 ### Configuration files
