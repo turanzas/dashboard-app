@@ -19,5 +19,5 @@ Once it's running, you can access the Eureka dashboard at: [http://localhost:807
 
 - **Build the Docker Image**
   ```bash
-  ./gradlew jib
+  mvn clean install jib:build
   ```
