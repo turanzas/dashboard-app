@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.dashboard.app</groupId>
+        <artifactId>dashboard-app</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <artifactId>account-container</artifactId>
+
+    <dependencies>
+        <!-- DASHBOARD-APP -->
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>account-rest-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>account-application-services</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>account-domain-services</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>account-domain-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>account-db-access</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>account-messaging</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <configuration>
+                    <to>
+                        <image>turanzas/dashboard-app/service-account:${project.version}</image>
+                    </to>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

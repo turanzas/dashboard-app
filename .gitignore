@@ -24,3 +24,6 @@ gradle-app.setting
 .idea/
 *.iml
 *.iws
+
+# Excalidraw generated files
+*.excalidraw

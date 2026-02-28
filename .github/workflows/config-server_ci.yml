@@ -19,11 +19,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: 'gradle'
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v5
+          cache: 'maven'
       - name: Build with Gradle Wrapper
-        run: cd config-server && ./gradlew :build -x test
+        run: cd config-server && ./mvn clean install -DskipTests
   test:
     name: Unit Tests
     needs: [ build ]
@@ -38,8 +36,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: 'gradle'
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v5
+          cache: 'maven'
       - name: Test with Gradle Wrapper
-        run: cd config-server && ./gradlew :test
+        run: cd config-server && ./mvn test
