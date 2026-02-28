@@ -19,8 +19,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: 'gradle'
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v5
+          cache: 'maven'
       - name: SonarQube Analysis
-        run: ./gradlew sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        run: mvn sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}

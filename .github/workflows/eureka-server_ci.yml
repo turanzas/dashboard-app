@@ -19,11 +19,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: 'gradle'
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v5
-      - name: Build with Gradle Wrapper
-        run: cd eureka-server && ./gradlew :build -x test
+          cache: 'maven'
+      - name: Build with Maven
+        run: cd eureka-server && mvn clean install -DskipTests
   test:
     name: Unit Tests
     needs: [ build ]
@@ -38,8 +36,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: 'gradle'
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v5
-      - name: Test with Gradle Wrapper
-        run: cd eureka-server && ./gradlew :test
+          cache: 'maven'
+      - name: Test with Maven
+        run: cd eureka-server && mvn test

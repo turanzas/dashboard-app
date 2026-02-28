@@ -15,10 +15,10 @@ import reactor.core.publisher.Mono
 
 @Configuration
 @EnableWebFluxSecurity
-class SecurityConfig {
+open class SecurityConfig {
 
     @Bean
-    fun securityWebFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
+    open fun securityWebFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
         http
             .authorizeExchange { exchanges ->
                 exchanges

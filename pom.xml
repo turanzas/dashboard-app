@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <version>4.0.3</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.dashboard.app</groupId>
+    <artifactId>dashboard-app</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>api-gateway-server</module>
+        <module>config-server</module>
+        <module>eureka-server</module>
+        <module>financial-entity-service</module>
+        <module>service-account</module>
+        <module>service-common</module>
+    </modules>
+
+    <properties>
+        <kotlin.version>2.3.10</kotlin.version>
+        <kotlin.code.style>official</kotlin.code.style>
+        <kotlin.compiler.jvmTarget>17</kotlin.compiler.jvmTarget>
+        <spring-cloud.version>2025.1.1</spring-cloud.version>
+        <jib-maven-plugin.version>3.3.1</jib-maven-plugin.version>
+        <depgraph-maven-plugin.version>4.0.3</depgraph-maven-plugin.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>mavenCentral</id>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>spring-repo</id>
+            <url>https://repo.spring.io/release</url>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- SPRING-CLOUD -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- DASHBOARD-APP -->
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>api-gateway-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>config-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>eureka-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- SERVICE-COMMON -->
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>common-domain-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- FINANCIAL-ENTITY-SERVICE -->
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>financial-entity-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- SERVICE-ACCOUNT -->
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>account-application-services</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>account-domain-services</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>account-domain-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>account-db-access</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>account-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>account-rest-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- Defines plugins version that are defined in the modules -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.google.cloud.tools</groupId>
+                    <artifactId>jib-maven-plugin</artifactId>
+                    <version>${jib-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <!-- Defines source directories for all modules -->
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>src/test/kotlin</testSourceDirectory>
+        <!-- Defines plugins for all modules -->
+        <plugins>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.6.3</version>
+                <configuration>
+                    <mainClass>MainKt</mainClass>
+                </configuration>
+            </plugin>
+            <!-- Dependency graph plugin to visualize module dependencies -->
+            <!-- Depends on graphviz, make sure to have it installed and in your system PATH -->
+            <plugin>
+                <groupId>com.github.ferstl</groupId>
+                <artifactId>depgraph-maven-plugin</artifactId>
+                <version>${depgraph-maven-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
