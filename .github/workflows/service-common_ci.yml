@@ -1,8 +1,8 @@
-name: Financial Entity Service CI
+name: Common Service CI
 
 on:
   pull_request:
-    paths: [ "service-financial-entity/**" ]
+    paths: [ "service-common/**" ]
   workflow_dispatch:
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Build with Maven
-        run: mvn install -N && mvn install -f service-common -DskipTests && mvn install -f service-financial-entity -DskipTests
+        run: mvn -B clean install -N && cd service-common && mvn -B verify
   test:
     name: Unit Tests
     needs: [ build ]
@@ -38,4 +38,4 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Test with Maven
-        run: mvn install -N && mvn install -f service-common -DskipTests && mvn test -f service-financial-entity
+        run: cd service-common && mvn test
