@@ -19,7 +19,7 @@ abstract class BaseId<T>(val value: T) {
     }
 
     override fun hashCode(): Int {
-        return value?.hashCode() ?: 0
+        return value.hashCode()
     }
 
 }
