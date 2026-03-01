@@ -21,7 +21,7 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Build with Maven
-        run: cd service-financial-entity && mvn clean install -DskipTests
+        run: mvn clean install -N && cd service-financial-entity && mvn clean install -DskipTests
   test:
     name: Unit Tests
     needs: [ build ]
