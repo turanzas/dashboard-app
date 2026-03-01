@@ -11,6 +11,14 @@ import com.dashboard.app.common.domain.model.valueobject.Money.Companion.ZERO
 import com.dashboard.app.common.domain.model.valueobject.UserId
 import java.util.*
 
+/**
+ * Represents a financial account associated with a user and a financial entity.
+ *
+ * @property financialEntityId The ID of the financial entity this account belongs to.
+ * @property userId The ID of the user who owns this account.
+ * @property balance The current balance of the account.
+ * @property status The current status of the account.
+ */
 class Account(
     val financialEntityId: FinancialEntityId,
     val userId: UserId,
@@ -19,9 +27,7 @@ class Account(
     var status: AccountStatus = ACTIVE
 ): AggregateRoot<AccountId>(id) {
 
-    fun isActive(): Boolean {
-        return status == ACTIVE
-    }
+    fun isActive(): Boolean = status == ACTIVE
 
     fun activate() {
         if (status == CLOSED) {
@@ -41,8 +47,6 @@ class Account(
         status = CLOSED
     }
 
-    override fun toString(): String {
-        return "Account(id=$id, balance=$balance, status=$status)"
-    }
+    override fun toString(): String = "Account(id=$id, balance=$balance, status=$status)"
 
 }
