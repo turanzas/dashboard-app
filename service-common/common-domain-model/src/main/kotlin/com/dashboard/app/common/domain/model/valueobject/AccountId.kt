@@ -1,6 +1,6 @@
 package com.dashboard.app.common.domain.model.valueobject
 
-import java.util.UUID
+import java.util.*
 
 /**
  * AccountId is a value object that represents the unique identifier of an account in the system.
@@ -9,8 +9,6 @@ import java.util.UUID
  */
 class AccountId(value: UUID): BaseId<UUID>(value) {
 
-    override fun toString(): String {
-        return "AccountId(value=$value)"
-    }
+    override fun toString(): String = "AccountId(value=$value)"
 
 }
