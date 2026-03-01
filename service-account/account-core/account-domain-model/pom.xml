@@ -13,4 +13,12 @@
 
     <artifactId>account-domain-model</artifactId>
 
+    <dependencies>
+        <!-- DASHBOARD-APP -->
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>common-domain-model</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
