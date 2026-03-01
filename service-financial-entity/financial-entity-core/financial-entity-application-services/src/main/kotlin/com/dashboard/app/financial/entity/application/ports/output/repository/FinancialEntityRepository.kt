@@ -1,7 +1,7 @@
 package com.dashboard.app.financial.entity.application.ports.output.repository
 
+import com.dashboard.app.common.domain.model.valueobject.FinancialEntityId
 import com.dashboard.app.financial.entity.domain.model.entity.FinancialEntity
-import com.dashboard.app.financial.entity.domain.model.valueobject.FinancialEntityId
 
 interface FinancialEntityRepository {
 
