@@ -38,4 +38,4 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Test with Maven
-        run: cd service-financial-entity && mvn test
+        run: mvn install -N && mvn install -f service-common -DskipTests && mvn test -f service-financial-entity
