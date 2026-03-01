@@ -9,7 +9,7 @@ import com.dashboard.app.common.domain.model.valueobject.BaseId
  *
  * @param ID The type of the entity's identifier.
  */
-abstract class BaseEntity<ID>(val id: ID) where ID : BaseId<*> {
+abstract class BaseEntity<ID>(val id: ID) where ID: BaseId<*> {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
