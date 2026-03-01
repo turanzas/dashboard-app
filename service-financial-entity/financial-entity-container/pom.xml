@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.dashboard.app</groupId>
+        <artifactId>dashboard-app</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <artifactId>financial-entity-container</artifactId>
+
+    <dependencies>
+        <!-- DASHBOARD APP -->
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>financial-entity-rest-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>financial-entity-application-services</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>financial-entity-domain-services</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>financial-entity-domain-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>financial-entity-db-access</artifactId>
+        </dependency>
+        <!-- SPRING BOOT -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
