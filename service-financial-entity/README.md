@@ -1,5 +1,7 @@
 # Financial Entity
 
+![financial-entity-module-dependencies.png](_assets/dependency-graph.png)
+
 ### Actuator
 
 Show endpoints
