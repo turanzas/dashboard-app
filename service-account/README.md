@@ -1,1 +1,1 @@
-![dependency-graph.png](assets/dependency-graph.png)
+![dependency-graph.png](_assets/dependency-graph.png)
