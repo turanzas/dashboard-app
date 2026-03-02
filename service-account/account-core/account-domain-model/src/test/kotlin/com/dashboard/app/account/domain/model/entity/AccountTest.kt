@@ -1,21 +1,27 @@
 package com.dashboard.app.account.domain.model.entity
 
 import com.dashboard.app.account.domain.model.exception.IllegalStatusException
+import com.dashboard.app.account.domain.model.valueobject.AccountStatus
 import com.dashboard.app.account.domain.model.valueobject.AccountStatus.*
 import com.dashboard.app.common.domain.model.valueobject.AccountId
 import com.dashboard.app.common.domain.model.valueobject.FinancialEntityId
+import com.dashboard.app.common.domain.model.valueobject.Money
 import com.dashboard.app.common.domain.model.valueobject.Money.Companion.ZERO
 import com.dashboard.app.common.domain.model.valueobject.UserId
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
+import java.math.BigDecimal
 import java.util.*
 import kotlin.test.Test
 
 class AccountTest {
 
     companion object {
+        val ACCOUNT_ID: AccountId = AccountId(UUID.randomUUID())
         val FINANCIAL_ENTITY_ID: FinancialEntityId = FinancialEntityId(UUID.randomUUID())
         val USER_ID: UserId = UserId(UUID.randomUUID())
     }
@@ -24,36 +30,106 @@ class AccountTest {
     lateinit var account: Account
 
     @Nested
-    @DisplayName("When create an account")
+    @DisplayName("Given creating an account")
     inner class InitializeAccount {
 
-        @Test
-        fun `should create account with given financial entity id`() {
-            // when
-            account = Account(FINANCIAL_ENTITY_ID, USER_ID)
+        @Nested
+        @DisplayName("When using the constructor")
+        inner class UsingConstructor {
 
-            // Then
-            assertThat(account.financialEntityId).isEqualTo(FINANCIAL_ENTITY_ID)
+            @Test
+            fun `should create account with given id`() {
+                // when
+                account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID)
+
+                // then
+                assertThat { account.id == ACCOUNT_ID }
+            }
+
+            @Test
+            fun `should create account with given financial entity id`() {
+                // when
+                account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID)
+
+                // Then
+                assertThat { account.financialEntityId == FINANCIAL_ENTITY_ID }
+            }
+
+            @Test
+            fun `should create account with given user id`() {
+                // when
+                account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID)
+
+                // Then
+                assertThat { account.userId == USER_ID }
+            }
+
+            @Test
+            fun `should create account with given balance`() {
+                // given
+                val balance = Money(BigDecimal(100))
+
+                // when
+                account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID, balance)
+
+                // Then
+                assertThat { account.balance == balance }
+            }
+
+            @Test
+            fun `should create account with given status`() {
+                // given
+                val status = INACTIVE
+
+                // when
+                account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID, ZERO, status)
+
+                // then
+                assertThat { account.status == status }
+            }
+
         }
 
-        @Test
-        fun `should create account with given user id`() {
-            // when
-            account = Account(FINANCIAL_ENTITY_ID, USER_ID)
+        @Nested
+        @DisplayName("When using the initialize method")
+        inner class UsingInitializeMethod {
 
-            // Then
-            assertThat(account.userId).isEqualTo(USER_ID)
-        }
+            @Test
+            fun `should create account with given financial entity id`() {
+                // when
+                val event = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
 
-        @Test
-        fun `should initialize with default values`() {
-            // when
-            account = Account(FINANCIAL_ENTITY_ID, USER_ID)
+                // Then
+                assertThat { event.data.financialEntityId == FINANCIAL_ENTITY_ID }
+            }
 
-            // Then
-            assertThat(account.id).isNotNull()
-            assertThat(account.balance).isEqualTo(ZERO)
-            assertThat(account.status).isEqualTo(ACTIVE)
+            @Test
+            fun `should create account with given user id`() {
+                // when
+                val event = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
+
+                // then
+                assertThat { event.data.userId == USER_ID }
+            }
+
+            @Test
+            fun `should create account with default balance`() {
+                // when
+                val event = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
+
+                // Then
+                assertThat { event.data.balance == ZERO }
+            }
+
+            @Test
+            fun `should create account with default status`() {
+                // when
+                val event = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
+
+                // then
+                assertThat { event.data.status == ACTIVE }
+            }
+
         }
 
     }
@@ -62,40 +138,21 @@ class AccountTest {
     @DisplayName("When checking if account is active")
     inner class CheckIfAccountIsActive {
 
-        @Test
-        fun `should return true if status is active`() {
+        @ParameterizedTest
+        @CsvSource(
+            "ACTIVE, true",
+            "INACTIVE, false",
+            "CLOSED, false"
+        )
+        fun `should return true if status is active`(status: AccountStatus, expected: Boolean) {
             // given: an inactive account
-            account = Account(FINANCIAL_ENTITY_ID, USER_ID)
+            account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, status)
 
             // When
             val result = account.isActive()
 
             // Then
-            assert(result)
-        }
-
-        @Test
-        fun `should return false if status is inactive`() {
-            // given: an inactive account
-            account = Account(FINANCIAL_ENTITY_ID, USER_ID, AccountId(UUID.randomUUID()), ZERO, INACTIVE)
-
-            // when
-            val result = account.isActive()
-
-            // then
-            assertThat(result).isFalse()
-        }
-
-        @Test
-        fun `should return false if status is closed`() {
-            // given: a closed account
-            account = Account(FINANCIAL_ENTITY_ID, USER_ID, AccountId(UUID.randomUUID()), ZERO, CLOSED)
-
-            // when
-            val result = account.isActive()
-
-            // then
-            assertThat(result).isFalse()
+            assertThat { result == expected }
         }
 
     }
@@ -104,22 +161,27 @@ class AccountTest {
     @DisplayName("When activating an account")
     inner class ActivateAccount {
 
-        @Test
-        fun `should set status to active`() {
+        @ParameterizedTest
+        @CsvSource(
+            "INACTIVE, ACTIVE, true",
+            "ACTIVE, ACTIVE, false"
+        )
+        fun `should change status from current to given and return event with changed value`(initialStatus: AccountStatus, expectedStatus: AccountStatus, expectedChanged: Boolean) {
             // given
-            account = Account(FINANCIAL_ENTITY_ID, USER_ID, AccountId(UUID.randomUUID()), ZERO, INACTIVE)
+            account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, initialStatus)
 
             // when
-            account.activate()
+            val event = account.activate()
 
             // then
-            assertThat(account.status).isEqualTo(ACTIVE)
+            assertThat { event.data.status == expectedStatus }
+            assertThat { event.changed == expectedChanged }
         }
 
         @Test
         fun `should throw exception if account is closed`() {
             // given
-            account = Account(FINANCIAL_ENTITY_ID, USER_ID, AccountId(UUID.randomUUID()), ZERO, CLOSED)
+            account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, CLOSED)
 
             // when & then
             assertThatThrownBy { account.activate() }
@@ -133,23 +195,27 @@ class AccountTest {
     @DisplayName("When deactivating an account")
     inner class DeactivateAccount {
 
-        @Test
-        fun `should set status to inactive`() {
-            // given: an active account
-            account = Account(FINANCIAL_ENTITY_ID, USER_ID)
+        @ParameterizedTest
+        @CsvSource(
+            "ACTIVE, INACTIVE, true",
+            "INACTIVE, INACTIVE, false"
+        )
+        fun `should change status from current to given and return event with changed value`(initialStatus: AccountStatus, expectedStatus: AccountStatus, expectedChanged: Boolean) {
+            // given
+            account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, initialStatus)
 
+            // when
+            val event = account.deactivate()
 
-            // When
-            account.deactivate()
-
-            // Then
-            assertThat(account.status).isEqualTo(INACTIVE)
+            // then
+            assertThat { event.data.status == expectedStatus }
+            assertThat { event.changed == expectedChanged }
         }
 
         @Test
         fun `should throw exception if account is closed`() {
-            // given: a closed account
-            account = Account(FINANCIAL_ENTITY_ID, USER_ID, AccountId(UUID.randomUUID()), ZERO, CLOSED)
+            // given
+            account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, CLOSED)
 
             // when & then
             assertThatThrownBy { account.deactivate() }
@@ -163,16 +229,22 @@ class AccountTest {
     @DisplayName("When closing an account")
     inner class CloseAccount {
 
-        @Test
-        fun `should set status to closed`() {
+        @ParameterizedTest
+        @CsvSource(
+            "ACTIVE,true",
+            "INACTIVE,true",
+            "CLOSED,false"
+        )
+        fun `should set status to closed`(initialStatus: AccountStatus, expectedChanged: Boolean) {
             // given: an active account
-            account = Account(FINANCIAL_ENTITY_ID, USER_ID)
+            account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, initialStatus)
 
             // when
-            account.close()
+            val event = account.close()
 
             // then
-            assertThat(account.status).isEqualTo(CLOSED)
+            assertThat { event.data.status == CLOSED }
+            assertThat { event.changed == expectedChanged }
         }
 
     }
