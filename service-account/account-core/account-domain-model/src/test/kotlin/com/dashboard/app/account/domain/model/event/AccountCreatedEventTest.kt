@@ -1,15 +1,14 @@
 package com.dashboard.app.account.domain.model.event
 
 import com.dashboard.app.account.domain.model.entity.Account
-import com.dashboard.app.common.domain.model.valueobject.AccountStatus.ACTIVE
 import com.dashboard.app.common.domain.model.valueobject.AccountId
+import com.dashboard.app.common.domain.model.valueobject.AccountStatus.ACTIVE
 import com.dashboard.app.common.domain.model.valueobject.FinancialEntityId
 import com.dashboard.app.common.domain.model.valueobject.Money
 import com.dashboard.app.common.domain.model.valueobject.UserId
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import java.math.BigDecimal
-import java.util.*
 import kotlin.test.Test
 
 class AccountCreatedEventTest {
@@ -25,7 +24,7 @@ class AccountCreatedEventTest {
         fun `should create event with account`() {
             // given
             val account = Account(AccountId.random(), FinancialEntityId.random(),
-                UserId(UUID.randomUUID()), Money(BigDecimal(100)), ACTIVE)
+                UserId.random(), Money(BigDecimal(100)), ACTIVE)
 
             // when
             event = AccountCreatedEvent(account)
