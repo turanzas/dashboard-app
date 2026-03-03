@@ -2,7 +2,7 @@ package com.dashboard.app.account.domain.model.entity
 
 import com.dashboard.app.account.domain.model.event.AccountCreatedEvent
 import com.dashboard.app.account.domain.model.event.AccountStatusChangedEvent
-import com.dashboard.app.account.domain.model.exception.IllegalStatusException
+import com.dashboard.app.account.domain.model.exception.AccountDomainException
 import com.dashboard.app.account.domain.model.valueobject.AccountStatus
 import com.dashboard.app.account.domain.model.valueobject.AccountStatus.*
 import com.dashboard.app.common.domain.model.entity.AggregateRoot
@@ -47,7 +47,7 @@ class Account(
 
     fun activate(): AccountStatusChangedEvent {
         if (currentStatus == CLOSED) {
-            throw IllegalStatusException("Cannot activate a closed account.")
+            throw AccountDomainException("Cannot activate a closed account.")
         }
         val event = AccountStatusChangedEvent(id, ACTIVE, currentStatus != ACTIVE)
         currentStatus = ACTIVE
@@ -56,7 +56,7 @@ class Account(
 
     fun deactivate(): AccountStatusChangedEvent {
         if (currentStatus == CLOSED) {
-            throw IllegalStatusException("Cannot deactivate a closed account.")
+            throw AccountDomainException("Cannot deactivate a closed account.")
         }
         val event = AccountStatusChangedEvent(id, INACTIVE, currentStatus != INACTIVE)
         currentStatus = INACTIVE
