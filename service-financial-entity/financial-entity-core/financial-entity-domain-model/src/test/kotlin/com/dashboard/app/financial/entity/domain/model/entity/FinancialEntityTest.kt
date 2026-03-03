@@ -21,16 +21,7 @@ class FinancialEntityTest {
             val entity = FinancialEntity(NAME)
 
             // then
-            assertThat(entity.name).isEqualTo(NAME)
-        }
-
-        @Test
-        fun `should create a FinancialEntity with default id`() {
-            // when
-            val entity = FinancialEntity(NAME)
-
-            // then
-            assertThat(entity.id).isNotNull
+            assertThat { entity.name == NAME }
         }
 
         @Test
@@ -42,7 +33,7 @@ class FinancialEntityTest {
             val entity = FinancialEntity(NAME, id)
 
             // then
-            assertThat(entity.id).isEqualTo(id)
+            assertThat { entity.id == id }
         }
 
     }

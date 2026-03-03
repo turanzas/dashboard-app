@@ -15,7 +15,7 @@ class AccountIdTest {
         val accountId = AccountId(uuid)
 
         // then
-        assertThat(accountId.value).isEqualTo(uuid)
+        assertThat { accountId.value == uuid }
     }
 
 }

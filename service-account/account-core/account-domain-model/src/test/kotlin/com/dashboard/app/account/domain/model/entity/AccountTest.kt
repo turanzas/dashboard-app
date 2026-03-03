@@ -24,6 +24,8 @@ class AccountTest {
         val ACCOUNT_ID: AccountId = AccountId(UUID.randomUUID())
         val FINANCIAL_ENTITY_ID: FinancialEntityId = FinancialEntityId(UUID.randomUUID())
         val USER_ID: UserId = UserId(UUID.randomUUID())
+        val BALANCE: Money = Money(BigDecimal(100))
+        val STATUS: AccountStatus = ACTIVE
     }
 
     // SUT
@@ -40,7 +42,7 @@ class AccountTest {
             @Test
             fun `should create account with given id`() {
                 // when
-                account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID)
+                account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID, BALANCE, STATUS)
 
                 // then
                 assertThat { account.id == ACCOUNT_ID }
@@ -49,7 +51,7 @@ class AccountTest {
             @Test
             fun `should create account with given financial entity id`() {
                 // when
-                account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID)
+                account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID, BALANCE, STATUS)
 
                 // Then
                 assertThat { account.financialEntityId == FINANCIAL_ENTITY_ID }
@@ -58,7 +60,7 @@ class AccountTest {
             @Test
             fun `should create account with given user id`() {
                 // when
-                account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID)
+                account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID, BALANCE, STATUS)
 
                 // Then
                 assertThat { account.userId == USER_ID }
@@ -67,10 +69,10 @@ class AccountTest {
             @Test
             fun `should create account with given balance`() {
                 // given
-                val balance = Money(BigDecimal(100))
+                val balance = Money(BigDecimal(1000))
 
                 // when
-                account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID, balance)
+                account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID, balance, STATUS)
 
                 // Then
                 assertThat { account.balance == balance }
@@ -100,7 +102,7 @@ class AccountTest {
                 val event = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
 
                 // Then
-                assertThat { event.data.financialEntityId == FINANCIAL_ENTITY_ID }
+                assertThat { event.account.financialEntityId == FINANCIAL_ENTITY_ID }
             }
 
             @Test
@@ -109,7 +111,7 @@ class AccountTest {
                 val event = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
 
                 // then
-                assertThat { event.data.userId == USER_ID }
+                assertThat { event.account.userId == USER_ID }
             }
 
             @Test
@@ -118,7 +120,7 @@ class AccountTest {
                 val event = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
 
                 // Then
-                assertThat { event.data.balance == ZERO }
+                assertThat { event.account.balance == ZERO }
             }
 
             @Test
@@ -127,7 +129,7 @@ class AccountTest {
                 val event = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
 
                 // then
-                assertThat { event.data.status == ACTIVE }
+                assertThat { event.account.status == ACTIVE }
             }
 
         }
@@ -174,7 +176,8 @@ class AccountTest {
             val event = account.activate()
 
             // then
-            assertThat { event.data.status == expectedStatus }
+            assertThat { event.accountId == account.id }
+            assertThat { event.status == expectedStatus }
             assertThat { event.changed == expectedChanged }
         }
 
@@ -208,7 +211,8 @@ class AccountTest {
             val event = account.deactivate()
 
             // then
-            assertThat { event.data.status == expectedStatus }
+            assertThat { event.accountId == account.id }
+            assertThat { event.status == expectedStatus }
             assertThat { event.changed == expectedChanged }
         }
 
@@ -243,10 +247,59 @@ class AccountTest {
             val event = account.close()
 
             // then
-            assertThat { event.data.status == CLOSED }
+            assertThat { event.accountId == account.id }
+            assertThat { event.status == CLOSED }
             assertThat { event.changed == expectedChanged }
         }
 
+    }
+
+    @Nested
+    @DisplayName("When using getters")
+    inner class UsingGetters {
+
+        @Test
+        fun `balance getter should return current balance`() {
+            // given
+            val balance = Money(BigDecimal(500))
+            account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID, balance, STATUS)
+
+            // when
+            val result = account.balance
+
+            // then
+            assertThat { result == balance }
+        }
+
+        @Test
+        fun `status getter should return current status`() {
+            // given
+            val status = INACTIVE
+            account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID, ZERO, status)
+
+            // when
+            val result = account.status
+
+            // then
+            assertThat { result == status }
+        }
+
+    }
+
+    @Test
+    fun `toString should return string representation of account`() {
+        // test fixture
+        val balance = Money(BigDecimal(100))
+        val status = INACTIVE
+
+        // given
+        account = Account(ACCOUNT_ID, FINANCIAL_ENTITY_ID, USER_ID, balance, status)
+
+        // when
+        val result = account.toString()
+
+        // then
+        assertThat { result == "Account(id=$ACCOUNT_ID, balance=$balance, status=$status)" }
     }
 
 }
