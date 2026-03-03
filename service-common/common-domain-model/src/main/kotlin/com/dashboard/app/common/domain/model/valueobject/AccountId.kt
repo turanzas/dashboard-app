@@ -9,6 +9,10 @@ import java.util.*
  */
 class AccountId(value: UUID): BaseId<UUID>(value) {
 
+    companion object {
+        fun random(): AccountId = AccountId(UUID.randomUUID())
+    }
+
     override fun toString(): String = "AccountId(value=$value)"
 
 }

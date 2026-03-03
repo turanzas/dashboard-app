@@ -21,10 +21,28 @@ interface AccountDomainService {
      */
     fun validateAndInitiateAccount(financialEntity: FinancialEntity, user: User): AccountCreatedEvent
 
+    /**
+     * Activates the given account and returns an event indicating the status change.
+     *
+     * @param account The account to be activated.
+     * @return An event indicating that the account has been activated.
+     */
     fun activate(account: Account): AccountStatusChangedEvent
 
+    /**
+     * Deactivates the given account and returns an event indicating the status change.
+     *
+     * @param account The account to be deactivated.
+     * @return An event indicating that the account has been deactivated.
+     */
     fun deactivate(account: Account): AccountStatusChangedEvent
 
+    /**
+     * Closes the given account and returns an event indicating the status change.
+     *
+     * @param account The account to be closed.
+     * @return An event indicating that the account has been closed.
+     */
     fun close(account: Account): AccountStatusChangedEvent
 
 }
