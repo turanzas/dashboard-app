@@ -1,8 +1,10 @@
 package com.dashboard.app.account.domain.service
 
+import com.dashboard.app.account.domain.model.entity.Account
 import com.dashboard.app.account.domain.model.entity.FinancialEntity
 import com.dashboard.app.account.domain.model.entity.User
 import com.dashboard.app.account.domain.model.event.AccountCreatedEvent
+import com.dashboard.app.account.domain.model.event.AccountStatusChangedEvent
 
 /**
  * Account domain service handles business logic related to account domain.
@@ -18,5 +20,11 @@ interface AccountDomainService {
      * @throws com.dashboard.app.account.domain.model.exception.AccountDomainException if the financial entity or user is inactive.
      */
     fun validateAndInitiateAccount(financialEntity: FinancialEntity, user: User): AccountCreatedEvent
+
+    fun activate(account: Account): AccountStatusChangedEvent
+
+    fun deactivate(account: Account): AccountStatusChangedEvent
+
+    fun close(account: Account): AccountStatusChangedEvent
 
 }

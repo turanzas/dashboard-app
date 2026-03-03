@@ -1,5 +1,7 @@
 package com.dashboard.app.common.domain.model.event
 
+import java.time.ZoneId
+import java.time.ZoneOffset.UTC
 import java.time.ZonedDateTime
 
 /**
@@ -8,5 +10,7 @@ import java.time.ZonedDateTime
  * @param T The type of data associated with the event.
  */
 abstract class DomainEvent<T>(
-    val occurredAt: ZonedDateTime = ZonedDateTime.now()
+
+    val occurredAt: ZonedDateTime = ZonedDateTime.now(ZoneId.of(UTC.id))
+
 )
