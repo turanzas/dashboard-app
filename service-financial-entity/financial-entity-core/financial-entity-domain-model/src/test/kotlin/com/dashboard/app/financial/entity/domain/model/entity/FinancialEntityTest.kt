@@ -3,7 +3,6 @@ package com.dashboard.app.financial.entity.domain.model.entity
 import com.dashboard.app.common.domain.model.valueobject.FinancialEntityId
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Nested
-import java.util.*
 import kotlin.test.Test
 
 class FinancialEntityTest {
@@ -27,7 +26,7 @@ class FinancialEntityTest {
         @Test
         fun `should create a FinancialEntity with given id`() {
             // given
-            val id = FinancialEntityId(UUID.randomUUID())
+            val id = FinancialEntityId.random()
 
             // when
             val entity = FinancialEntity(NAME, id)
