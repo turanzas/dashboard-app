@@ -1,6 +1,6 @@
 package com.dashboard.app.account.domain.model.entity
 
-import com.dashboard.app.account.domain.model.exception.IllegalStatusException
+import com.dashboard.app.account.domain.model.exception.AccountDomainException
 import com.dashboard.app.account.domain.model.valueobject.AccountStatus
 import com.dashboard.app.account.domain.model.valueobject.AccountStatus.*
 import com.dashboard.app.common.domain.model.valueobject.AccountId
@@ -188,7 +188,7 @@ class AccountTest {
 
             // when & then
             assertThatThrownBy { account.activate() }
-                .isInstanceOf(IllegalStatusException::class.java)
+                .isInstanceOf(AccountDomainException::class.java)
                 .hasMessage("Cannot activate a closed account.")
         }
 
@@ -223,7 +223,7 @@ class AccountTest {
 
             // when & then
             assertThatThrownBy { account.deactivate() }
-                .isInstanceOf(IllegalStatusException::class.java)
+                .isInstanceOf(AccountDomainException::class.java)
                 .hasMessage("Cannot deactivate a closed account.")
         }
 
