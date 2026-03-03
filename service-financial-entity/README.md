@@ -1,6 +1,10 @@
 # Financial Entity
 
+## Module Dependencies Graph
 ![financial-entity-module-dependencies.png](_assets/dependency-graph.png)
+
+## Bounded Context
+![financial_entity_bounded_context.png](_assets/financial_entity_bounded_context.png)
 
 ### Actuator
 

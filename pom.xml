@@ -23,8 +23,8 @@
         <module>config-server</module>
         <module>eureka-server</module>
         <!-- SERVICE MODULES -->
-        <module>service-common</module>
         <module>service-account</module>
+        <module>service-common</module>
         <module>service-financial-entity</module>
     </modules>
 
@@ -117,6 +117,11 @@
             <!-- SERVICE-ACCOUNT -->
             <dependency>
                 <groupId>com.dashboard.app</groupId>
+                <artifactId>account-rest-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
                 <artifactId>account-application-services</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -138,11 +143,6 @@
             <dependency>
                 <groupId>com.dashboard.app</groupId>
                 <artifactId>account-messaging</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.dashboard.app</groupId>
-                <artifactId>account-rest-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
