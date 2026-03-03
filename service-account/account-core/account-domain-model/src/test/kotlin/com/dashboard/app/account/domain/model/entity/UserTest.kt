@@ -5,7 +5,6 @@ import com.dashboard.app.common.domain.model.valueobject.UserStatus.ACTIVE
 import com.dashboard.app.common.domain.model.valueobject.UserStatus.INACTIVE
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
-import java.util.*
 import kotlin.test.Test
 
 class UserTest {
@@ -20,7 +19,7 @@ class UserTest {
         @Test
         fun `should initialize with the correct id`() {
             // given
-            val userId = UserId(UUID.randomUUID())
+            val userId = UserId.random()
 
             // When
             user = User(userId, ACTIVE)
@@ -35,7 +34,7 @@ class UserTest {
             val status = INACTIVE
 
             // when
-            user = User(UserId(UUID.randomUUID()), status)
+            user = User(UserId.random(), status)
 
             // then
             assert(user.status == status)

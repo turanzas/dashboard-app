@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import java.math.BigDecimal
-import java.util.*
 import kotlin.test.Test
 
 class AccountTest {
@@ -19,7 +18,7 @@ class AccountTest {
     private companion object {
         val ACCOUNT_ID: AccountId = AccountId.random()
         val FINANCIAL_ENTITY_ID: FinancialEntityId = FinancialEntityId.random()
-        val USER_ID: UserId = UserId(UUID.randomUUID())
+        val USER_ID: UserId = UserId.random()
         val BALANCE: Money = Money(BigDecimal(100))
         val STATUS: AccountStatus = ACTIVE
     }
