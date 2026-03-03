@@ -24,8 +24,10 @@
         <module>eureka-server</module>
         <!-- SERVICE MODULES -->
         <module>service-account</module>
+        <module>service-card</module>
         <module>service-common</module>
         <module>service-financial-entity</module>
+        <module>service-transaction</module>
     </modules>
 
     <properties>
