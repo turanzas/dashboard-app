@@ -16,4 +16,4 @@ class AccountStatusChangedEvent(
     val accountId: AccountId,
     val status: AccountStatus,
     val changed: Boolean
-): DomainEvent<Account>
+): DomainEvent<Account>()

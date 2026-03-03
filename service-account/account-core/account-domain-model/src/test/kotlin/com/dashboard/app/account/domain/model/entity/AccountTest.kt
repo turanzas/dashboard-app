@@ -20,7 +20,7 @@ import kotlin.test.Test
 
 class AccountTest {
 
-    companion object {
+    private companion object {
         val ACCOUNT_ID: AccountId = AccountId(UUID.randomUUID())
         val FINANCIAL_ENTITY_ID: FinancialEntityId = FinancialEntityId(UUID.randomUUID())
         val USER_ID: UserId = UserId(UUID.randomUUID())
