@@ -17,7 +17,7 @@ import kotlin.test.Test
 class AccountTest {
 
     private companion object {
-        val ACCOUNT_ID: AccountId = AccountId(UUID.randomUUID())
+        val ACCOUNT_ID: AccountId = AccountId.random()
         val FINANCIAL_ENTITY_ID: FinancialEntityId = FinancialEntityId(UUID.randomUUID())
         val USER_ID: UserId = UserId(UUID.randomUUID())
         val BALANCE: Money = Money(BigDecimal(100))
@@ -144,7 +144,7 @@ class AccountTest {
         )
         fun `should return true if status is active, false otherwise`(status: AccountStatus, expected: Boolean) {
             // given
-            account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, status)
+            account = Account(AccountId.random(), FINANCIAL_ENTITY_ID, USER_ID, ZERO, status)
 
             // when
             val result = account.isActive()
@@ -166,7 +166,7 @@ class AccountTest {
         )
         fun `should change status from current to given and return true if updated, false otherwise`(initialStatus: AccountStatus, expectedUpdated: Boolean) {
             // given
-            account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, initialStatus)
+            account = Account(AccountId.random(), FINANCIAL_ENTITY_ID, USER_ID, ZERO, initialStatus)
 
             // when
             val updated = account.activate()
@@ -179,7 +179,7 @@ class AccountTest {
         @Test
         fun `should throw exception if account is closed`() {
             // given
-            account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, CLOSED)
+            account = Account(AccountId.random(), FINANCIAL_ENTITY_ID, USER_ID, ZERO, CLOSED)
 
             // when & then
             assertThatThrownBy { account.activate() }
@@ -200,7 +200,7 @@ class AccountTest {
         )
         fun `should change status from current to given and return true if updated, false otherwise`(initialStatus: AccountStatus, expectedUpdated: Boolean) {
             // given
-            account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, initialStatus)
+            account = Account(AccountId.random(), FINANCIAL_ENTITY_ID, USER_ID, ZERO, initialStatus)
 
             // when
             val updated = account.deactivate()
@@ -213,7 +213,7 @@ class AccountTest {
         @Test
         fun `should throw exception if account is closed`() {
             // given
-            account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, CLOSED)
+            account = Account(AccountId.random(), FINANCIAL_ENTITY_ID, USER_ID, ZERO, CLOSED)
 
             // when & then
             assertThatThrownBy { account.deactivate() }
@@ -235,7 +235,7 @@ class AccountTest {
         )
         fun `should set status to closed and return true if updated, false otherwise`(initialStatus: AccountStatus, expectedUpdated: Boolean) {
             // given: an active account
-            account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, initialStatus)
+            account = Account(AccountId.random(), FINANCIAL_ENTITY_ID, USER_ID, ZERO, initialStatus)
 
             // when
             val updated = account.close()

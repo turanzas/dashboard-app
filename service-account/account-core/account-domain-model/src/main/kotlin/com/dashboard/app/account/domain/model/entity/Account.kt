@@ -5,7 +5,6 @@ import com.dashboard.app.common.domain.model.entity.AggregateRoot
 import com.dashboard.app.common.domain.model.valueobject.*
 import com.dashboard.app.common.domain.model.valueobject.AccountStatus.*
 import com.dashboard.app.common.domain.model.valueobject.Money.Companion.ZERO
-import java.util.*
 
 /**
  * Represents a financial account associated with a user and a financial entity.
@@ -29,7 +28,7 @@ class Account(
     companion object {
         fun initialize(financialEntityId: FinancialEntityId, userId: UserId): Account =
             Account(
-                AccountId(UUID.randomUUID()),
+                AccountId.random(),
                 financialEntityId,
                 userId,
                 ZERO,

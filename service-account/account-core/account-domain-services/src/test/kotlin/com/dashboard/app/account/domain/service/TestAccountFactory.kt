@@ -8,7 +8,7 @@ class TestAccountFactory {
 
     companion object {
         fun createAccount(status: AccountStatus) = Account(
-            AccountId(UUID.randomUUID()),
+            AccountId.random(),
             FinancialEntityId(UUID.randomUUID()),
             UserId(UUID.randomUUID()),
             Money.ZERO,
