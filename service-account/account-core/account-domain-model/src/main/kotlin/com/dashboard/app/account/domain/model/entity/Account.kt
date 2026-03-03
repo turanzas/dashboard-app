@@ -18,19 +18,21 @@ import java.util.*
  *
  * @property financialEntityId The ID of the financial entity this account belongs to.
  * @property userId The ID of the user who owns this account.
- * @property balance The current balance of the account.
- * @property status The current status of the account.
+ * @property currentBalance The current balance of the account.
+ * @property currentStatus The current status of the account.
  */
 class Account(
     id: AccountId,
     val financialEntityId: FinancialEntityId,
     val userId: UserId,
-    var balance: Money = ZERO,
-    var status: AccountStatus = ACTIVE
+    private var currentBalance: Money,
+    private var currentStatus: AccountStatus
 ): AggregateRoot<AccountId>(id) {
 
-    companion object {
+    val balance get() = currentBalance
+    val status get() = currentStatus
 
+    companion object {
         fun initialize(financialEntityId: FinancialEntityId, userId: UserId): AccountCreatedEvent =
             AccountCreatedEvent(Account(
                 AccountId(UUID.randomUUID()),
@@ -39,35 +41,34 @@ class Account(
                 ZERO,
                 ACTIVE
             ))
-
     }
 
-    fun isActive(): Boolean = status == ACTIVE
+    fun isActive(): Boolean = currentStatus == ACTIVE
 
     fun activate(): StatusChangedEvent {
-        if (status == CLOSED) {
+        if (currentStatus == CLOSED) {
             throw IllegalStatusException("Cannot activate a closed account.")
         }
-        val event = StatusChangedEvent(this, changed = status != ACTIVE)
-        status = ACTIVE
+        val event = StatusChangedEvent(id, ACTIVE, currentStatus != ACTIVE)
+        currentStatus = ACTIVE
         return event
     }
 
     fun deactivate(): StatusChangedEvent {
-        if (status == CLOSED) {
+        if (currentStatus == CLOSED) {
             throw IllegalStatusException("Cannot deactivate a closed account.")
         }
-        val event = StatusChangedEvent(this, changed = status != INACTIVE)
-        status = INACTIVE
+        val event = StatusChangedEvent(id, INACTIVE, currentStatus != INACTIVE)
+        currentStatus = INACTIVE
         return event
     }
 
     fun close(): StatusChangedEvent {
-        val event = StatusChangedEvent(this, changed = status != CLOSED)
-        status = CLOSED
+        val event = StatusChangedEvent(id, CLOSED, currentStatus != CLOSED)
+        currentStatus = CLOSED
         return event
     }
 
-    override fun toString(): String = "Account(id=$id, balance=$balance, status=$status)"
+    override fun toString(): String = "Account(id=$id, balance=$currentBalance, status=$currentStatus)"
 
 }

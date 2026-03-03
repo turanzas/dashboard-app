@@ -1,8 +1,8 @@
 package com.dashboard.app.common.domain.model.valueobject
 
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.util.UUID
+import java.util.*
 
 class FinancialEntityIdTest {
 
@@ -15,8 +15,7 @@ class FinancialEntityIdTest {
         val financialEntityId = FinancialEntityId(id)
 
         // then
-        Assertions.assertThat(financialEntityId).isNotNull
-        Assertions.assertThat(financialEntityId.value).isEqualTo(id)
+        assertThat { financialEntityId.value == id }
     }
 
 }

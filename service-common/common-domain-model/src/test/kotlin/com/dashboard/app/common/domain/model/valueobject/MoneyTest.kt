@@ -27,7 +27,7 @@ class MoneyTest {
             val result = money.isGreaterThanZero()
 
             // Then
-            assertThat(result).isTrue()
+            assertThat { result }
         }
 
         @ParameterizedTest
@@ -40,7 +40,7 @@ class MoneyTest {
             val result = money.isGreaterThanZero()
 
             // Then
-            assertThat(result).isFalse()
+            assertThat { !result }
         }
 
     }
@@ -64,7 +64,7 @@ class MoneyTest {
             val result = money.isGreaterThan(other)
 
             // Then
-            assertThat(result).isTrue()
+            assertThat { result }
         }
 
         @ParameterizedTest
@@ -83,7 +83,7 @@ class MoneyTest {
             val result = money.isGreaterThan(other)
 
             // Then
-            assertThat(result).isFalse()
+            assertThat { !result }
         }
 
     }
@@ -103,7 +103,7 @@ class MoneyTest {
             val result = money.isZero()
 
             // Then
-            assertThat(result).isTrue()
+            assertThat { result }
         }
 
         @ParameterizedTest
@@ -117,7 +117,7 @@ class MoneyTest {
             val result = money.isZero()
 
             // Then
-            assertThat(result).isFalse()
+            assertThat { !result }
         }
 
     }
@@ -143,7 +143,7 @@ class MoneyTest {
             val result = money.add(other)
 
             // Then
-            assertThat(result).isEqualTo(expected)
+            assertThat { result == expected }
         }
 
     }
@@ -169,7 +169,7 @@ class MoneyTest {
             val result = money.subtract(other)
 
             // Then
-            assertThat(result).isEqualTo(expected)
+            assertThat { result == expected }
         }
 
     }
@@ -195,7 +195,7 @@ class MoneyTest {
             val result = money.multiply(factor)
 
             // Then
-            assertThat(result).isEqualTo(expected)
+            assertThat { result == expected }
         }
 
     }
