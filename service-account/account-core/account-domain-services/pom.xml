@@ -19,6 +19,16 @@
             <groupId>com.dashboard.app</groupId>
             <artifactId>account-domain-model</artifactId>
         </dependency>
+        <!-- LOGGING -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
         <!-- TEST -->
         <dependency>
             <groupId>org.assertj</groupId>

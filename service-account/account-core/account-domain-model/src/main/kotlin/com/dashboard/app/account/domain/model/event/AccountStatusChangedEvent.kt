@@ -10,10 +10,10 @@ import com.dashboard.app.common.domain.model.valueobject.AccountId
  *
  * @property accountId The ID of the account whose status has changed.
  * @property status The new status of the account.
- * @property changed Indicates whether the status was actually changed (true if the status was updated, false if it was already in the desired state).
+ * @property updated Indicates whether the status was actually changed (true if the status was updated, false if it was already in the desired state).
  */
 class AccountStatusChangedEvent(
     val accountId: AccountId,
     val status: AccountStatus,
-    val changed: Boolean
+    val updated: Boolean
 ): DomainEvent<Account>()

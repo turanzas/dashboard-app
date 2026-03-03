@@ -142,14 +142,14 @@ class AccountTest {
             "INACTIVE, false",
             "CLOSED, false"
         )
-        fun `should return true if status is active`(status: AccountStatus, expected: Boolean) {
-            // given: an inactive account
+        fun `should return true if status is active, false otherwise`(status: AccountStatus, expected: Boolean) {
+            // given
             account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, status)
 
-            // When
+            // when
             val result = account.isActive()
 
-            // Then
+            // then
             assertThat { result == expected }
         }
 
@@ -161,20 +161,19 @@ class AccountTest {
 
         @ParameterizedTest
         @CsvSource(
-            "INACTIVE, ACTIVE, true",
-            "ACTIVE, ACTIVE, false"
+            "INACTIVE, true",
+            "ACTIVE, false"
         )
-        fun `should change status from current to given and return event with changed value`(initialStatus: AccountStatus, expectedStatus: AccountStatus, expectedChanged: Boolean) {
+        fun `should change status from current to given and return true if updated, false otherwise`(initialStatus: AccountStatus, expectedUpdated: Boolean) {
             // given
             account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, initialStatus)
 
             // when
-            val event = account.activate()
+            val updated = account.activate()
 
             // then
-            assertThat { event.accountId == account.id }
-            assertThat { event.status == expectedStatus }
-            assertThat { event.changed == expectedChanged }
+            assertThat { account.status == ACTIVE }
+            assertThat { updated == expectedUpdated }
         }
 
         @Test
@@ -196,20 +195,19 @@ class AccountTest {
 
         @ParameterizedTest
         @CsvSource(
-            "ACTIVE, INACTIVE, true",
-            "INACTIVE, INACTIVE, false"
+            "ACTIVE, true",
+            "INACTIVE, false"
         )
-        fun `should change status from current to given and return event with changed value`(initialStatus: AccountStatus, expectedStatus: AccountStatus, expectedChanged: Boolean) {
+        fun `should change status from current to given and return true if updated, false otherwise`(initialStatus: AccountStatus, expectedUpdated: Boolean) {
             // given
             account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, initialStatus)
 
             // when
-            val event = account.deactivate()
+            val updated = account.deactivate()
 
             // then
-            assertThat { event.accountId == account.id }
-            assertThat { event.status == expectedStatus }
-            assertThat { event.changed == expectedChanged }
+            assertThat { account.status == INACTIVE }
+            assertThat { updated == expectedUpdated }
         }
 
         @Test
@@ -235,17 +233,15 @@ class AccountTest {
             "INACTIVE,true",
             "CLOSED,false"
         )
-        fun `should set status to closed`(initialStatus: AccountStatus, expectedChanged: Boolean) {
+        fun `should set status to closed and return true if updated, false otherwise`(initialStatus: AccountStatus, expectedUpdated: Boolean) {
             // given: an active account
             account = Account(AccountId(UUID.randomUUID()), FINANCIAL_ENTITY_ID, USER_ID, ZERO, initialStatus)
 
             // when
-            val event = account.close()
+            val updated = account.close()
 
             // then
-            assertThat { event.accountId == account.id }
-            assertThat { event.status == CLOSED }
-            assertThat { event.changed == expectedChanged }
+            assertThat { updated == expectedUpdated }
         }
 
     }

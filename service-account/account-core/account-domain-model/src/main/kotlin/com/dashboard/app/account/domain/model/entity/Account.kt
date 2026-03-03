@@ -1,6 +1,5 @@
 package com.dashboard.app.account.domain.model.entity
 
-import com.dashboard.app.account.domain.model.event.AccountStatusChangedEvent
 import com.dashboard.app.account.domain.model.exception.AccountDomainException
 import com.dashboard.app.common.domain.model.entity.AggregateRoot
 import com.dashboard.app.common.domain.model.valueobject.*
@@ -40,28 +39,28 @@ class Account(
 
     fun isActive(): Boolean = currentStatus == ACTIVE
 
-    fun activate(): AccountStatusChangedEvent {
+    fun activate(): Boolean {
         if (currentStatus == CLOSED) {
             throw AccountDomainException("Cannot activate a closed account.")
         }
-        val event = AccountStatusChangedEvent(id, ACTIVE, currentStatus != ACTIVE)
+        val updated = currentStatus != ACTIVE
         currentStatus = ACTIVE
-        return event
+        return updated
     }
 
-    fun deactivate(): AccountStatusChangedEvent {
+    fun deactivate(): Boolean {
         if (currentStatus == CLOSED) {
             throw AccountDomainException("Cannot deactivate a closed account.")
         }
-        val event = AccountStatusChangedEvent(id, INACTIVE, currentStatus != INACTIVE)
+        val updated = currentStatus != INACTIVE
         currentStatus = INACTIVE
-        return event
+        return updated
     }
 
-    fun close(): AccountStatusChangedEvent {
-        val event = AccountStatusChangedEvent(id, CLOSED, currentStatus != CLOSED)
+    fun close(): Boolean {
+        val updated =  currentStatus != CLOSED
         currentStatus = CLOSED
-        return event
+        return updated
     }
 
     override fun toString(): String = "Account(id=$id, balance=$currentBalance, status=$currentStatus)"
