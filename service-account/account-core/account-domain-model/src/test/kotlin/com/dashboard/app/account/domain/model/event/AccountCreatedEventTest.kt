@@ -24,7 +24,7 @@ class AccountCreatedEventTest {
         @Test
         fun `should create event with account`() {
             // given
-            val account = Account(AccountId.random(), FinancialEntityId(UUID.randomUUID()),
+            val account = Account(AccountId.random(), FinancialEntityId.random(),
                 UserId(UUID.randomUUID()), Money(BigDecimal(100)), ACTIVE)
 
             // when

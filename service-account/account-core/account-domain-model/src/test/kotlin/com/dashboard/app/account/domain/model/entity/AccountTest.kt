@@ -18,7 +18,7 @@ class AccountTest {
 
     private companion object {
         val ACCOUNT_ID: AccountId = AccountId.random()
-        val FINANCIAL_ENTITY_ID: FinancialEntityId = FinancialEntityId(UUID.randomUUID())
+        val FINANCIAL_ENTITY_ID: FinancialEntityId = FinancialEntityId.random()
         val USER_ID: UserId = UserId(UUID.randomUUID())
         val BALANCE: Money = Money(BigDecimal(100))
         val STATUS: AccountStatus = ACTIVE

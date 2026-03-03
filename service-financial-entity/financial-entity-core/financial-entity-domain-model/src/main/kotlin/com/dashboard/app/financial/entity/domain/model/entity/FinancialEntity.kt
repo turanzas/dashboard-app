@@ -2,7 +2,6 @@ package com.dashboard.app.financial.entity.domain.model.entity
 
 import com.dashboard.app.common.domain.model.entity.AggregateRoot
 import com.dashboard.app.common.domain.model.valueobject.FinancialEntityId
-import java.util.*
 
 /**
  * Represents a financial entity with a unique identifier and a name.
@@ -12,7 +11,7 @@ import java.util.*
  */
 class FinancialEntity(
     var name: String,
-    id: FinancialEntityId = FinancialEntityId(UUID.randomUUID())
+    id: FinancialEntityId = FinancialEntityId.random()
 ): AggregateRoot<FinancialEntityId>(id) {
 
     override fun toString(): String = "FinancialEntity(id='$id', name='$name')"
