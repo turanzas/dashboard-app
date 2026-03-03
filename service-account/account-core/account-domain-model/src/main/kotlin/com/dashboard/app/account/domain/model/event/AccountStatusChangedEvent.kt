@@ -1,7 +1,7 @@
 package com.dashboard.app.account.domain.model.event
 
 import com.dashboard.app.account.domain.model.entity.Account
-import com.dashboard.app.account.domain.model.valueobject.AccountStatus
+import com.dashboard.app.common.domain.model.valueobject.AccountStatus
 import com.dashboard.app.common.domain.model.event.DomainEvent
 import com.dashboard.app.common.domain.model.valueobject.AccountId
 

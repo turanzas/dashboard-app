@@ -1,16 +1,11 @@
 package com.dashboard.app.account.domain.model.entity
 
-import com.dashboard.app.account.domain.model.event.AccountCreatedEvent
 import com.dashboard.app.account.domain.model.event.AccountStatusChangedEvent
 import com.dashboard.app.account.domain.model.exception.AccountDomainException
-import com.dashboard.app.account.domain.model.valueobject.AccountStatus
-import com.dashboard.app.account.domain.model.valueobject.AccountStatus.*
 import com.dashboard.app.common.domain.model.entity.AggregateRoot
-import com.dashboard.app.common.domain.model.valueobject.AccountId
-import com.dashboard.app.common.domain.model.valueobject.FinancialEntityId
-import com.dashboard.app.common.domain.model.valueobject.Money
+import com.dashboard.app.common.domain.model.valueobject.*
+import com.dashboard.app.common.domain.model.valueobject.AccountStatus.*
 import com.dashboard.app.common.domain.model.valueobject.Money.Companion.ZERO
-import com.dashboard.app.common.domain.model.valueobject.UserId
 import java.util.*
 
 /**
@@ -33,14 +28,14 @@ class Account(
     val status get() = currentStatus
 
     companion object {
-        fun initialize(financialEntityId: FinancialEntityId, userId: UserId): AccountCreatedEvent =
-            AccountCreatedEvent(Account(
+        fun initialize(financialEntityId: FinancialEntityId, userId: UserId): Account =
+            Account(
                 AccountId(UUID.randomUUID()),
                 financialEntityId,
                 userId,
                 ZERO,
                 ACTIVE
-            ))
+            )
     }
 
     fun isActive(): Boolean = currentStatus == ACTIVE

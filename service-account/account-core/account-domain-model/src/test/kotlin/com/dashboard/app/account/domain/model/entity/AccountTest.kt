@@ -1,13 +1,9 @@
 package com.dashboard.app.account.domain.model.entity
 
 import com.dashboard.app.account.domain.model.exception.AccountDomainException
-import com.dashboard.app.account.domain.model.valueobject.AccountStatus
-import com.dashboard.app.account.domain.model.valueobject.AccountStatus.*
-import com.dashboard.app.common.domain.model.valueobject.AccountId
-import com.dashboard.app.common.domain.model.valueobject.FinancialEntityId
-import com.dashboard.app.common.domain.model.valueobject.Money
+import com.dashboard.app.common.domain.model.valueobject.*
+import com.dashboard.app.common.domain.model.valueobject.AccountStatus.*
 import com.dashboard.app.common.domain.model.valueobject.Money.Companion.ZERO
-import com.dashboard.app.common.domain.model.valueobject.UserId
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
@@ -99,37 +95,37 @@ class AccountTest {
             @Test
             fun `should create account with given financial entity id`() {
                 // when
-                val event = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
+                account = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
 
                 // Then
-                assertThat { event.account.financialEntityId == FINANCIAL_ENTITY_ID }
+                assertThat { account.financialEntityId == FINANCIAL_ENTITY_ID }
             }
 
             @Test
             fun `should create account with given user id`() {
                 // when
-                val event = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
+                account = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
 
                 // then
-                assertThat { event.account.userId == USER_ID }
+                assertThat { account.userId == USER_ID }
             }
 
             @Test
             fun `should create account with default balance`() {
                 // when
-                val event = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
+                account = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
 
                 // Then
-                assertThat { event.account.balance == ZERO }
+                assertThat { account.balance == ZERO }
             }
 
             @Test
             fun `should create account with default status`() {
                 // when
-                val event = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
+                account = Account.initialize(FINANCIAL_ENTITY_ID, USER_ID)
 
                 // then
-                assertThat { event.account.status == ACTIVE }
+                assertThat { account.status == ACTIVE }
             }
 
         }

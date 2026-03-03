@@ -14,7 +14,7 @@
     <artifactId>account-messaging</artifactId>
 
     <dependencies>
-        <!-- MODULE DEPENDENCIES -->
+        <!-- DASHBOARD-APP -->
         <dependency>
             <groupId>com.dashboard.app</groupId>
             <artifactId>account-application-services</artifactId>
