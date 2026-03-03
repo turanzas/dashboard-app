@@ -9,5 +9,5 @@ import com.dashboard.app.common.domain.model.event.DomainEvent
  * @property account The account that was created.
  */
 class AccountCreatedEvent(
-    val account: Account
-): DomainEvent<Account>
+    val account: Account,
+): DomainEvent<Account>()
