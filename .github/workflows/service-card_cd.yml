@@ -1,9 +1,9 @@
-name: Eureka Server CD
+name: Card Service CD
 
 on:
   push:
     branches: [ "main" ]
-    paths: [ "eureka-server/**" ]
+    paths: [ "service-card/**" ]
   workflow_dispatch:
 
 jobs:
@@ -25,4 +25,4 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build image with Jib
-        run: cd financial-entity-service && mvn jib:build -DskipTests
+        run: mvn jib:build -f service-card -DskipTests

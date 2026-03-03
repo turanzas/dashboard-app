@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    name: Update Image API Gateway Server
+    name: Update Image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
