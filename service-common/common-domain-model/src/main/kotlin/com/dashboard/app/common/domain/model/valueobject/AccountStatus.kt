@@ -1,4 +1,4 @@
-package com.dashboard.app.account.domain.model.valueobject
+package com.dashboard.app.common.domain.model.valueobject
 
 /**
  * A value object representing the status of an account.

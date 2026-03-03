@@ -14,6 +14,7 @@
     <artifactId>account-application-services</artifactId>
 
     <dependencies>
+        <!-- DASHBOARD APP -->
         <dependency>
             <groupId>com.dashboard.app</groupId>
             <artifactId>account-domain-services</artifactId>

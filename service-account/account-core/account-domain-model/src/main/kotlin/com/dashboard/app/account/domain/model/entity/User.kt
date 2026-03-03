@@ -7,4 +7,8 @@ import com.dashboard.app.common.domain.model.valueobject.UserStatus
 class User(
     id: UserId,
     var status: UserStatus
-): AggregateRoot<UserId>(id)
+): AggregateRoot<UserId>(id) {
+
+    fun isActive(): Boolean = status == UserStatus.ACTIVE
+
+}
