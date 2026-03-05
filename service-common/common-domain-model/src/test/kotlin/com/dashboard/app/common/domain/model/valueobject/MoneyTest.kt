@@ -27,7 +27,7 @@ class MoneyTest {
             val result = money.isGreaterThanZero()
 
             // Then
-            assertThat { result }
+            assertThat(result).isTrue()
         }
 
         @ParameterizedTest
@@ -40,7 +40,7 @@ class MoneyTest {
             val result = money.isGreaterThanZero()
 
             // Then
-            assertThat { !result }
+            assertThat(result).isFalse()
         }
 
     }
@@ -64,7 +64,7 @@ class MoneyTest {
             val result = money.isGreaterThan(other)
 
             // Then
-            assertThat { result }
+            assertThat(result).isTrue()
         }
 
         @ParameterizedTest
@@ -83,7 +83,7 @@ class MoneyTest {
             val result = money.isGreaterThan(other)
 
             // Then
-            assertThat { !result }
+            assertThat(result).isFalse()
         }
 
     }
@@ -103,7 +103,7 @@ class MoneyTest {
             val result = money.isZero()
 
             // Then
-            assertThat { result }
+            assertThat(result).isTrue()
         }
 
         @ParameterizedTest
@@ -117,7 +117,75 @@ class MoneyTest {
             val result = money.isZero()
 
             // Then
-            assertThat { !result }
+            assertThat(result).isFalse()
+        }
+
+    }
+
+    @Nested
+    @DisplayName("When checking if the amount is positive")
+    inner class IsPositive {
+
+        @ParameterizedTest
+        @DisplayName("should return true when amount is positive")
+        @ValueSource(strings = ["10.00", "0.01", "0"])
+        fun `should return true when amount is positive`(amountStr: String) {
+            // Given
+            money = Money(BigDecimal(amountStr))
+
+            // When
+            val result = money.isPositive()
+
+            // Then
+            assertThat(result).isTrue()
+        }
+
+        @ParameterizedTest
+        @DisplayName("should return false when amount is not positive")
+        @ValueSource(strings = ["-5.00", "-0.01"])
+        fun `should return false when amount is not positive`(amountStr: String) {
+            // Given
+            money = Money(BigDecimal(amountStr))
+
+            // When
+            val result = money.isPositive()
+
+            // Then
+            assertThat(result).isFalse()
+        }
+
+    }
+
+    @Nested
+    @DisplayName("When checking if the amount is negative")
+    inner class IsNegative {
+
+        @ParameterizedTest
+        @DisplayName("should return true when amount is negative")
+        @ValueSource(strings = ["-5.00", "-0.01"])
+        fun `should return true when amount is negative`(amountStr: String) {
+            // Given
+            money = Money(BigDecimal(amountStr))
+
+            // When
+            val result = money.isNegative()
+
+            // Then
+            assertThat(result).isTrue()
+        }
+
+        @ParameterizedTest
+        @DisplayName("should return false when amount is not negative")
+        @ValueSource(strings = ["10.00", "0.01", "0"])
+        fun `should return false when amount is not negative`(amountStr: String) {
+            // Given
+            money = Money(BigDecimal(amountStr))
+
+            // When
+            val result = money.isNegative()
+
+            // Then
+            assertThat(result).isFalse()
         }
 
     }
@@ -143,7 +211,7 @@ class MoneyTest {
             val result = money.add(other)
 
             // Then
-            assertThat { result == expected }
+            assertThat(result).isEqualTo(expected)
         }
 
     }
@@ -169,7 +237,7 @@ class MoneyTest {
             val result = money.subtract(other)
 
             // Then
-            assertThat { result == expected }
+            assertThat(result).isEqualTo(expected)
         }
 
     }
@@ -195,7 +263,7 @@ class MoneyTest {
             val result = money.multiply(factor)
 
             // Then
-            assertThat { result == expected }
+            assertThat(result).isEqualTo(expected)
         }
 
     }
