@@ -180,10 +180,15 @@
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
+        <!-- LOGGING -->
         <dependency>
             <groupId>io.github.oshai</groupId>
             <artifactId>kotlin-logging-jvm</artifactId>
             <version>${kotlin-logging.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
         </dependency>
         <!-- TEST -->
         <dependency>
