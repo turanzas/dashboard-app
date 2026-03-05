@@ -19,12 +19,6 @@
             <groupId>com.dashboard.app</groupId>
             <artifactId>common-domain-model</artifactId>
         </dependency>
-        <!-- TEST -->
-        <dependency>
-            <groupId>com.ninja-squad</groupId>
-            <artifactId>springmockk</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
 </project>

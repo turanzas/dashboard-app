@@ -19,12 +19,6 @@
             <groupId>com.dashboard.app</groupId>
             <artifactId>account-domain-model</artifactId>
         </dependency>
-        <!-- LOGGING -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
 </project>

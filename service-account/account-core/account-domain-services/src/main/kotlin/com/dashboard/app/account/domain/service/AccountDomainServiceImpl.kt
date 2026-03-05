@@ -8,11 +8,9 @@ import com.dashboard.app.account.domain.model.event.AccountStatusChangedEvent
 import com.dashboard.app.account.domain.model.exception.AccountDomainException
 import com.dashboard.app.common.domain.model.valueobject.AccountStatus.*
 import io.github.oshai.kotlinlogging.KotlinLogging
-import lombok.extern.slf4j.Slf4j
 
 private val logger = KotlinLogging.logger {}
 
-@Slf4j
 class AccountDomainServiceImpl: AccountDomainService {
 
     override fun validateAndInitiateAccount(

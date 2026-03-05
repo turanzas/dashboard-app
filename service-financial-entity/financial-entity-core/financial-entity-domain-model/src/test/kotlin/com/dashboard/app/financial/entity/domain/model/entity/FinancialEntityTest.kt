@@ -2,37 +2,59 @@ package com.dashboard.app.financial.entity.domain.model.entity
 
 import com.dashboard.app.common.domain.model.valueobject.FinancialEntityId
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import kotlin.test.Test
 
+val ID = FinancialEntityId.random()
+val NAME = "Test Financial Entity"
+
 class FinancialEntityTest {
 
-    companion object {
-        const val NAME = "Test Financial Entity"
-    }
-
     @Nested
+    @DisplayName("When creating a FinancialEntity instance")
     inner class CreateInstance {
 
-        @Test
-        fun `should create a FinancialEntity with valid name`() {
-            // when
-            val entity = FinancialEntity(NAME)
+        @Nested
+        @DisplayName("With constructor parameters")
+        inner class WithConstructorParameters {
 
-            // then
-            assertThat { entity.name == NAME }
+            @Test
+            fun `should create a FinancialEntity with given id`() {
+                // given
+                val id = FinancialEntityId.random()
+
+                // when
+                val entity = FinancialEntity(ID, NAME)
+
+                // then
+                assertThat(entity.id).isEqualTo(id)
+            }
+
+            @Test
+            fun `should create a FinancialEntity with valid name`() {
+                // when
+                val entity = FinancialEntity(ID, NAME)
+
+                // then
+                assertThat(entity.name).isEqualTo(NAME)
+            }
+
         }
 
-        @Test
-        fun `should create a FinancialEntity with given id`() {
-            // given
-            val id = FinancialEntityId.random()
+        @Nested
+        @DisplayName("With initialization method")
+        inner class WithInitializationMethod {
 
-            // when
-            val entity = FinancialEntity(NAME, id)
+            @Test
+            fun `should create a FinancialEntity with default values`() {
+                // when
+                val entity = FinancialEntity.initialize(NAME)
 
-            // then
-            assertThat { entity.id == id }
+                // then
+                assertThat(entity.name).isEqualTo(NAME)
+            }
+
         }
 
     }
