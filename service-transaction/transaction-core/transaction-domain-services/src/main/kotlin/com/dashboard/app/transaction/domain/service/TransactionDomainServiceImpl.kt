@@ -7,7 +7,10 @@ import com.dashboard.app.transaction.domain.model.entity.Transaction
 import com.dashboard.app.transaction.domain.model.entity.User
 import com.dashboard.app.transaction.domain.model.event.TransactionCreatedEvent
 import com.dashboard.app.transaction.domain.model.exception.TransactionDomainException
+import io.github.oshai.kotlinlogging.KotlinLogging
 import java.time.ZonedDateTime
+
+private val logger = KotlinLogging.logger {}
 
 class TransactionDomainServiceImpl(): TransactionDomainService {
 
@@ -23,36 +26,39 @@ class TransactionDomainServiceImpl(): TransactionDomainService {
         validateAccount(account)
         validateCard(card)
         // create event with initialized transaction
-        return TransactionCreatedEvent(
-            Transaction.initialize(
-                user.id,
-                account?.id,
-                card?.id,
-                amount,
-                effectiveAt
-            )
+        val transaction = Transaction.initialize(
+            user.id,
+            account?.id,
+            card?.id,
+            amount,
+            effectiveAt
         )
+        logger.info { "Transaction domain entity '${transaction.id}' created successfully for user ${user.id} with ${if(account!=null) "account: '${account.id}'" else ""} ${if(card!=null) "card: '${card.id}'" else ""}." }
+        return TransactionCreatedEvent(transaction)
     }
 
-    private fun validateCard(card: Card?) {
-        card?.let {
-            if (!card.isActive()) {
-                throw TransactionDomainException("An inactive card cannot be used to initiate a transaction.")
-            }
+    private fun validateUser(user: User) {
+        if (!user.isActive()) {
+            logger.warn { "Inactive user ${user.id} used for transaction initiation"  }
+            throw TransactionDomainException("An inactive user cannot initiate transactions.")
         }
     }
 
     private fun validateAccount(account: Account?) {
         account?.let {
             if (!account.isActive()) {
+                logger.warn { "Inactive account ${account.id} used for transaction initiation"  }
                 throw TransactionDomainException("An inactive account cannot be used to initiate a transaction.")
             }
         }
     }
 
-    private fun validateUser(user: User) {
-        if (!user.isActive()) {
-            throw TransactionDomainException("An inactive user cannot initiate transactions.")
+    private fun validateCard(card: Card?) {
+        card?.let {
+            if (!card.isActive()) {
+                logger.warn { "Inactive card ${card.id} used for transaction initiation"  }
+                throw TransactionDomainException("An inactive card cannot be used to initiate a transaction.")
+            }
         }
     }
 
