@@ -19,8 +19,10 @@ class AccountDomainServiceImpl: AccountDomainService {
         financialEntity: FinancialEntity,
         user: User
     ): AccountCreatedEvent {
+        // perform validations
         validateFinancialEntity(financialEntity)
         validateUser(user)
+        // create event with initialized account
         val account = Account.initialize(financialEntity.id, user.id)
         logger.info { "Account domain entity '${account.id}' created successfully for user ${user.id} under financial entity ${financialEntity.id}." }
         return AccountCreatedEvent(account)
