@@ -7,17 +7,17 @@
 
     <parent>
         <groupId>com.dashboard.app</groupId>
-        <artifactId>dashboard-app</artifactId>
+        <artifactId>transaction-core</artifactId>
         <version>1.0</version>
     </parent>
 
-    <artifactId>transaction-core</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>transaction-application-services</artifactId>
 
-    <modules>
-        <module>transaction-domain-services</module>
-        <module>transaction-domain-model</module>
-        <module>transaction-application-services</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>transaction-domain-services</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
