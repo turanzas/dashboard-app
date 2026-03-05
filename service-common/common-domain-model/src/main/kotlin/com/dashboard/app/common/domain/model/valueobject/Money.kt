@@ -4,7 +4,9 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 /**
- * Value Object representing a monetary amount.
+ * Value object representing a monetary amount.
+ *
+ * @property amount The monetary amount represented as a BigDecimal.
  */
 data class Money(val amount: BigDecimal) {
 
@@ -17,6 +19,10 @@ data class Money(val amount: BigDecimal) {
     fun isGreaterThan(other: Money): Boolean = amount > other.amount
 
     fun isZero(): Boolean = amount.compareTo(BigDecimal.ZERO) == 0
+
+    fun isPositive(): Boolean = isZero() || isGreaterThanZero()
+
+    fun isNegative(): Boolean = amount < BigDecimal.ZERO
 
     fun add(other: Money): Money = Money(setScale(this.amount.add(other.amount)))
 

@@ -84,6 +84,43 @@
                 <artifactId>eureka-server</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <!-- SERVICE-ACCOUNT -->
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>account-rest-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>account-application-services</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>account-domain-services</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>account-domain-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>account-db-access</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>account-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- SERVICE-CARD -->
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>card-domain-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- SERVICE-COMMON -->
             <dependency>
                 <groupId>com.dashboard.app</groupId>
@@ -116,41 +153,22 @@
                 <artifactId>financial-entity-rest-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!-- SERVICE-ACCOUNT -->
+            <!-- SERVICE-TRANSACTION -->
             <dependency>
                 <groupId>com.dashboard.app</groupId>
-                <artifactId>account-rest-api</artifactId>
+                <artifactId>transaction-domain-services</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.dashboard.app</groupId>
-                <artifactId>account-application-services</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.dashboard.app</groupId>
-                <artifactId>account-domain-services</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.dashboard.app</groupId>
-                <artifactId>account-domain-model</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.dashboard.app</groupId>
-                <artifactId>account-db-access</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.dashboard.app</groupId>
-                <artifactId>account-messaging</artifactId>
+                <artifactId>transaction-domain-model</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
+        <!-- KOTLIN -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-reflect</artifactId>
@@ -161,6 +179,7 @@
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
+        <!-- TEST -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test-junit5</artifactId>
@@ -169,6 +188,11 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
