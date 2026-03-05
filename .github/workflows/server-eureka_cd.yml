@@ -1,9 +1,9 @@
-name: API Gateway Server CD
+name: Eureka Server CD
 
 on:
   push:
     branches: [ "main" ]
-    paths: [ "api-gateway-server/**" ]
+    paths: [ "server-eureka/**" ]
   workflow_dispatch:
 
 jobs:
@@ -25,4 +25,4 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build image with Jib
-        run: cd api-gateway-server && mvn jib:build -DskipTests
+        run: mvn jib:build -f server-eureka -DskipTests
