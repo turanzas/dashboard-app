@@ -1,4 +1,4 @@
 package com.dashboard.app.financial.entity.application.dto.findall
 
-class FindAllResponse {
+class FinancialEntity {
 }
