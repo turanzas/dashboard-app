@@ -21,7 +21,7 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Build with Maven
-        run: mvn -B clean install -N && cd service-common && mvn -B verify
+        run: mvn install -N && mvn install -f service-common -DskipTests
   test:
     name: Unit Tests
     needs: [ build ]
@@ -38,4 +38,4 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Test with Maven
-        run: cd service-common && mvn test
+        run: mvn install -N && mvn test -f service-common

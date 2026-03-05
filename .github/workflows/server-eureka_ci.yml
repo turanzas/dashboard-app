@@ -1,8 +1,8 @@
-name: API Gateway Server CI
+name: Eureka Server CI
 
 on:
   pull_request:
-    paths: [ "api-gateway-server/**" ]
+    paths: [ "server-eureka/**" ]
   workflow_dispatch:
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Build with Maven
-        run: cd api-gateway-server && mvn clean install -DskipTests
+        run: mvn clean install -f server-eureka -DskipTests
   test:
     name: Unit Tests
     needs: [ build ]
@@ -38,4 +38,4 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Test with Maven
-        run: cd api-gateway-server && mvn test
+        run: mvn test -f server-eureka

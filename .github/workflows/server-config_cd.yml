@@ -3,7 +3,7 @@ name: Config Server CD
 on:
   push:
     branches: [ "main" ]
-    paths: [ "config-server/**" ]
+    paths: [ "server-config/**" ]
   workflow_dispatch:
 
 jobs:
@@ -25,4 +25,4 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build image with Jib
-        run: cd config-server && mvn jib:build -DskipTests
+        run: mvn jib:build -f server-config -DskipTests
