@@ -19,9 +19,9 @@
 
     <modules>
         <!-- SERVER MODULES -->
-        <module>api-gateway-server</module>
-        <module>config-server</module>
-        <module>eureka-server</module>
+        <module>server-api-gateway</module>
+        <module>server-config</module>
+        <module>server-eureka</module>
         <!-- SERVICE MODULES -->
         <module>service-account</module>
         <module>service-card</module>
@@ -71,17 +71,17 @@
             <!-- DASHBOARD-APP -->
             <dependency>
                 <groupId>com.dashboard.app</groupId>
-                <artifactId>api-gateway-server</artifactId>
+                <artifactId>server-api-gateway</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.dashboard.app</groupId>
-                <artifactId>config-server</artifactId>
+                <artifactId>server-config</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.dashboard.app</groupId>
-                <artifactId>eureka-server</artifactId>
+                <artifactId>server-eureka</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- SERVICE-ACCOUNT -->

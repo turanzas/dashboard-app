@@ -11,7 +11,7 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>config-server</artifactId>
+    <artifactId>server-config</artifactId>
 
     <dependencies>
         <!-- SPRING BOOT -->
