@@ -12,6 +12,13 @@ interface TransactionApprovalResponseMessageListener {
      *
      * @param message The transaction approval response message to process.
      */
-    fun process(message: TransactionApprovalResponse)
+    fun transactionApproved(message: TransactionApprovalResponse)
+
+    /**
+     * Processes a transaction rejection response message.
+     *
+     * @param message The transaction approval response message to process.
+     */
+    fun transactionRejected(message: TransactionApprovalResponse)
 
 }
