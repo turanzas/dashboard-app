@@ -37,7 +37,7 @@ class TransactionApplicationServiceImplTest {
         @Test
         fun `should delegate to CreateTransactionHandler`() {
             // Test data
-            val command = CreateTransactionCommandFactory.create()
+            val command = CreateTransactionCommandFactory.createAccountTransaction()
 
             // Given
             every { createTransactionHandler.process(command) } returns CreateTransactionCommandFactory.createResponse()

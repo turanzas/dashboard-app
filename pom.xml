@@ -258,6 +258,24 @@
                         </configuration>
                     </execution>
                 </executions>
+                <!-- https://kotlinlang.org/docs/all-open-plugin.html -->
+                <configuration>
+                    <compilerPlugins>
+                        <!-- "all-open" or "spring" for the Spring support -->
+                        <plugin>spring</plugin>
+                    </compilerPlugins>
+                    <pluginOptions>
+                        <!-- Each annotation is placed on its own line -->
+                        <!-- e.g. <option>all-open:annotation=com.my.Annotation</option> -->
+                    </pluginOptions>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-allopen</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
