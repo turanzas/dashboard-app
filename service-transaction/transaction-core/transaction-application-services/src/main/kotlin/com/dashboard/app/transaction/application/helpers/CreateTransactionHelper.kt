@@ -15,12 +15,14 @@ import com.dashboard.app.transaction.domain.model.event.TransactionCreatedEvent
 import com.dashboard.app.transaction.domain.model.exception.TransactionDomainException
 import com.dashboard.app.transaction.domain.service.TransactionDomainService
 import io.github.oshai.kotlinlogging.KotlinLogging
+import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import java.time.ZonedDateTime
 import java.util.*
 
 private val logger = KotlinLogging.logger {}
 
+@Component
 class CreateTransactionHelper(
     val transactionDomainService: TransactionDomainService,
     val transactionRepository: TransactionRepository,

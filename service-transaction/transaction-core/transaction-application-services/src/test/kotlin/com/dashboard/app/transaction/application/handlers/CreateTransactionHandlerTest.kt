@@ -40,7 +40,7 @@ class CreateTransactionHandlerTest {
     @DisplayName("When processing a create transaction command")
     inner class ProcessCreateTransactionCommand {
 
-        val command = CreateTransactionCommandFactory.create()
+        val command = CreateTransactionCommandFactory.createAccountTransaction()
         val transactionCreatedEvent = TransactionCreatedEventFactory.create(
                 userId = command.userId,
                 accountId = command.accountId!!,

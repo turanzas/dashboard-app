@@ -10,18 +10,23 @@ class CreateTransactionCommandFactory {
 
     companion object {
         fun create(
-            userId: UUID = UUID.randomUUID(),
-            accountId: UUID = UUID.randomUUID(),
-            cardId: UUID = UUID.randomUUID(),
-            amount: BigDecimal = BigDecimal(100)
-        ): CreateTransactionCommand {
-            return CreateTransactionCommand(
+            userId: UUID,
+            accountId: UUID? = null,
+            cardId: UUID? = null,
+            amount: BigDecimal
+        ): CreateTransactionCommand =
+            CreateTransactionCommand(
                 userId,
                 accountId,
                 cardId,
                 amount
             )
-        }
+
+        fun createAccountTransaction(userId: UUID = UUID.randomUUID(), accountId: UUID = UUID.randomUUID(), amount: BigDecimal = BigDecimal(100)): CreateTransactionCommand =
+            create(userId = userId, accountId = accountId, amount = amount)
+
+        fun createCardTransaction(userId: UUID = UUID.randomUUID(), cardId: UUID = UUID.randomUUID(), amount: BigDecimal = BigDecimal(100)): CreateTransactionCommand =
+            create(userId = userId, cardId = cardId, amount = amount)
 
         fun createResponse(): CreateTransactionResponse =
             CreateTransactionResponse(

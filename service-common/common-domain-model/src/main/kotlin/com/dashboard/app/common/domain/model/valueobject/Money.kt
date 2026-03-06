@@ -10,6 +10,8 @@ import java.math.RoundingMode
  */
 data class Money(val value: BigDecimal) {
 
+    constructor(double: Double) : this(BigDecimal(double).setScale(2, RoundingMode.HALF_EVEN))
+
     companion object {
         val ZERO: Money = Money(BigDecimal.ZERO)
     }
