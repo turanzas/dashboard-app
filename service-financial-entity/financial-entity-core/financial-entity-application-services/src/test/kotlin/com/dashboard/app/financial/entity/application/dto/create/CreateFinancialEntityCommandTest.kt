@@ -1,13 +1,18 @@
 package com.dashboard.app.financial.entity.application.dto.create
 
+import jakarta.validation.Validation
+import jakarta.validation.Validator
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.assertj.core.api.SoftAssertions.assertSoftly
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import java.util.*
 import kotlin.test.Test
 
 class CreateFinancialEntityCommandTest {
+
+    val validator: Validator = Validation.buildDefaultValidatorFactory().validator
 
     // SUT
     lateinit var command: CreateFinancialEntityCommand
@@ -38,10 +43,14 @@ class CreateFinancialEntityCommandTest {
             val userId = UUID.randomUUID()
             val name = "A".repeat(51) // 51 characters
 
-            // When & Then
-            assertThatThrownBy { CreateFinancialEntityCommand(userId, name) }
-                .isInstanceOf(IllegalArgumentException::class.java)
-                .hasMessageContaining("size must be between 0 and 50")
+            // When
+            val violations = validator.validate<CreateFinancialEntityCommand>(CreateFinancialEntityCommand(userId, name))
+
+            // Then
+            assertSoftly { softly ->
+                softly.assertThat(violations).hasSize(1)
+                softly.assertThat(violations.first().message).isEqualTo("size must be between 0 and 50")
+            }
         }
 
     }
