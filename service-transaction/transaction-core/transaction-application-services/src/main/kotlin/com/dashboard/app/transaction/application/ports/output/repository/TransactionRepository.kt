@@ -14,7 +14,7 @@ interface TransactionRepository {
      * @param transaction The transaction to be saved.
      * @return The saved transaction with any generated identifiers or updated fields.
      */
-    fun save(transaction: Transaction): Transaction
+    fun save(transaction: Transaction): Transaction?
 
     /**
      * Finds a transaction by its unique identifier.

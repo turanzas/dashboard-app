@@ -17,4 +17,8 @@ class AccountVersion(
      */
     fun nextVersion(): AccountVersion = AccountVersion(number + 1)
 
+    override fun toString(): String {
+        return "AccountVersion(number=$number)"
+    }
+
 }
