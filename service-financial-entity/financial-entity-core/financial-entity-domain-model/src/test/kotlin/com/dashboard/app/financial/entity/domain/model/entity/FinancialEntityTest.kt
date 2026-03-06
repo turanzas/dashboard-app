@@ -21,14 +21,11 @@ class FinancialEntityTest {
 
             @Test
             fun `should create a FinancialEntity with given id`() {
-                // given
-                val id = FinancialEntityId.random()
-
                 // when
                 val entity = FinancialEntity(ID, NAME)
 
                 // then
-                assertThat(entity.id).isEqualTo(id)
+                assertThat(entity.id).isEqualTo(ID)
             }
 
             @Test
