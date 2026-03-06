@@ -1,5 +1,6 @@
 package com.dashboard.app.financial.entity.interfaces.rest
 
+import com.dashboard.app.financial.entity.application.dto.findall.FindAllFinancialEntityQuery
 import com.dashboard.app.financial.entity.application.dto.findall.FindAllFinancialEntityResponse
 import com.dashboard.app.financial.entity.application.ports.input.service.FinancialEntityApplicationService
 import org.springframework.web.bind.annotation.GetMapping
@@ -13,6 +14,7 @@ class FinancialEntityController(
 ) {
 
     @GetMapping(version = "v1+")
-    fun findAll(): FindAllFinancialEntityResponse = applicationService.find()
+    fun findAll(financialEntityQuery: FindAllFinancialEntityQuery): FindAllFinancialEntityResponse =
+        applicationService.find(financialEntityQuery)
 
 }

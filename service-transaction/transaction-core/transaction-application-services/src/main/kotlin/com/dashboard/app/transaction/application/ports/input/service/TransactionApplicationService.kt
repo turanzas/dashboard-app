@@ -4,6 +4,7 @@ import com.dashboard.app.transaction.application.dto.create.CreateTransactionCom
 import com.dashboard.app.transaction.application.dto.create.CreateTransactionResponse
 import com.dashboard.app.transaction.application.dto.find.FindTransactionsQuery
 import com.dashboard.app.transaction.application.dto.find.FindTransactionsResponse
+import jakarta.validation.Valid
 
 /**
  * Input port for transaction management use cases.
@@ -16,7 +17,7 @@ interface TransactionApplicationService {
      * @param command The command containing the details of the transaction to be created.
      * @return A response containing the result of the transaction creation.
      */
-    fun createTransaction(command: CreateTransactionCommand): CreateTransactionResponse
+    fun createTransaction(@Valid command: CreateTransactionCommand): CreateTransactionResponse
 
     /**
      * Finds transactions based on the provided query.
@@ -24,6 +25,6 @@ interface TransactionApplicationService {
      * @param query The query containing the criteria for finding transactions.
      * @return A response containing the list of transactions that match the query criteria.
      */
-    fun findTransactions(query: FindTransactionsQuery): FindTransactionsResponse
+    fun findTransactions(@Valid query: FindTransactionsQuery): FindTransactionsResponse
 
 }
