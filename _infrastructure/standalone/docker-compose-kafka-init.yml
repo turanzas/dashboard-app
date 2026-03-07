@@ -1,0 +1,35 @@
+name: dashboard-app
+
+services:
+
+  init-kafka:
+    image: confluentinc/cp-kafka:${KAFKA_VERSION}
+    entrypoint: [ '/bin/sh', '-c' ]
+    command: |
+      "
+      # block until kafka is reachable
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --list
+
+      echo -e 'Deleting kafka topics'
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic account-created --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic card-created --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic transaction-approval-request --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic transaction-approval-response --delete --if-exists
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic user-created --delete --if-exists
+
+      echo -e 'Creating kafka topics'
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic account-created --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic card-created --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic transaction-approval-request --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic transaction-approval-response --replication-factor 3 --partitions 3
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic user-created --replication-factor 3 --partitions 3
+
+      echo -e 'Successfully created the following topics:'
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --list
+      "
+    depends_on:
+        kafka-broker-1:
+            condition: service_healthy
+    extends:
+      file: docker-compose-base.yml
+      service: server-base-messaging-network

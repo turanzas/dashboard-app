@@ -1,0 +1,16 @@
+name: dashboard-app
+
+# NETWORKS #
+networks:
+  backend:
+    name: backend
+    driver: bridge
+  data:
+    name: data
+    driver: bridge
+  messaging:
+    name: messaging
+    driver: bridge
+  keycloak:
+    name: keycloak
+    driver: bridge
