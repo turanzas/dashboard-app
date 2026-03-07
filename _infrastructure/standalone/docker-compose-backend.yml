@@ -1,0 +1,21 @@
+name: dashboard-app
+
+services:
+
+  # Backend Layer
+
+  ## Financial Entity Service
+  financial-entity:
+    image: turanzas/financial-entity:1.0.0
+    container_name: financial-entity
+    ports:
+      - "8080:8080" # only for testing purposes
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    extends:
+      file: docker-compose-base.yml
+      service: service-backend-with-data

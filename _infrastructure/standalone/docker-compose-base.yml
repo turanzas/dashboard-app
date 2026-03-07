@@ -1,0 +1,78 @@
+services:
+
+  # BASE SERVER. #
+  server-base-messaging-network:
+    networks:
+      - ${MESSAGING_NETWORK:-messaging}
+
+  # BASE SERVICES. MAINLY FOR INTERNAL CONFIGURATION. NOT MEANT FOR SERVICE USAGE #
+  service-backend-base-network:
+    networks:
+      - ${BACKEND_NETWORK:-backend}
+
+  service-backend-base-config:
+    extends:
+      service: service-backend-base-network
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+
+  service-backend-base-server-config:
+    extends:
+      service: service-backend-base-config
+    depends_on:
+      config-server:
+        condition: service_healthy
+    environment:
+      SPRING_CONFIG_IMPORT: "optional:configserver:http://config-server:8070/"
+
+  service-backend-base-server-discovery:
+    extends:
+      service: service-backend-base-server-config
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8071/eureka/
+
+  # SERVICE VARIANTS. EXTENDABLE CONFIGURATIONS #
+  # - service-backend: most basic configuration. For services that only need discovery client and config server.
+  # - service-backend-with-data: for services that need to connect to the database.
+  #                              Depends on postgres being healthy and connected to the data network.
+  # - service-backend-with-messaging: for services that need to connect to the messaging system.
+  #                              Depends on kafka being healthy and connected to the messaging network.
+  # - service-backend-with-data-and-messaging: for services that need to connect to both the database and the messaging system.
+  #                              Depends on postgres and kafka being healthy and connected to their respective networks.
+  service-backend:
+    extends:
+      service: service-backend-base-server-discovery
+    depends_on:
+      discovery-server:
+        condition: service_healthy
+  service-backend-with-data:
+    extends:
+      service: service-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - ${DATA_NETWORK:-data}
+  service-backend-with-messaging:
+    extends:
+      service: service-backend
+    depends_on:
+      kafka:
+        condition: service_healthy
+    networks:
+      - ${MESSAGING_NETWORK:-messaging}
+  service-backend-with-data-and-messaging:
+    extends:
+      service: service-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - ${DATA_NETWORK:-data}
+      - ${MESSAGING_NETWORK:-messaging}
