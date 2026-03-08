@@ -22,6 +22,7 @@
         <module>server-api-gateway</module>
         <module>server-config</module>
         <module>server-eureka</module>
+        <module>server-kafka</module>
         <!-- SERVICE MODULES -->
         <module>service-account</module>
         <module>service-card</module>
@@ -97,6 +98,27 @@
             <dependency>
                 <groupId>com.dashboard.app</groupId>
                 <artifactId>server-eureka</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- KAFKA MODULES -->
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>kafka-config-data</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>kafka-consumer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>kafka-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>kafka-producer</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- SERVICE-ACCOUNT -->
