@@ -30,6 +30,7 @@
 
     <properties>
         <kafka-avro.version>1.12.1</kafka-avro.version>
+        <kafka-avro-serializer.version>8.1.1</kafka-avro-serializer.version>
     </properties>
 
     <dependencyManagement>
@@ -43,7 +44,25 @@
             <dependency>
                 <groupId>io.confluent</groupId>
                 <artifactId>kafka-avro-serializer</artifactId>
-                <version>${kafka-avro.version}</version>
+                <version>${kafka-avro-serializer.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-annotations</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-core</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.apache.avro</groupId>
