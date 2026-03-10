@@ -41,6 +41,7 @@
         <springmockk.version>5.0.1</springmockk.version>
         <kotlin-logging.version>7.0.3</kotlin-logging.version>
         <mapstruct.version>1.6.3</mapstruct.version>
+        <springdoc-openapi-starter-webmvc-ui.version>3.0.1</springdoc-openapi-starter-webmvc-ui.version>
     </properties>
 
     <repositories>
@@ -70,6 +71,11 @@
                 <version>${kotlin.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
             </dependency>
             <!-- MAPSTRUCT -->
             <dependency>
@@ -155,7 +161,17 @@
             <!-- SERVICE-CARD -->
             <dependency>
                 <groupId>com.dashboard.app</groupId>
+                <artifactId>card-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
                 <artifactId>card-domain-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>card-rest-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- SERVICE-COMMON -->
@@ -164,7 +180,11 @@
                 <artifactId>common-domain-model</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!-- SERVICE-FINANCIAL-ENTITY -->
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>common-rest-api</artifactId>
+                <version>${project.version}</version>
+            </dependency><!-- SERVICE-FINANCIAL-ENTITY -->
             <dependency>
                 <groupId>com.dashboard.app</groupId>
                 <artifactId>financial-entity-application-services</artifactId>
@@ -193,12 +213,22 @@
             <!-- SERVICE-TRANSACTION -->
             <dependency>
                 <groupId>com.dashboard.app</groupId>
+                <artifactId>transaction-application-services</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
                 <artifactId>transaction-domain-services</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.dashboard.app</groupId>
                 <artifactId>transaction-domain-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>transaction-rest-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

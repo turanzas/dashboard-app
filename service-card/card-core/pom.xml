@@ -7,15 +7,15 @@
 
     <parent>
         <groupId>com.dashboard.app</groupId>
-        <artifactId>dashboard-app</artifactId>
+        <artifactId>service-card</artifactId>
         <version>1.0</version>
     </parent>
 
-    <artifactId>service-card</artifactId>
+    <artifactId>card-core</artifactId>
     <packaging>pom</packaging>
+
     <modules>
-        <module>card-core</module>
-        <module>card-user-interface</module>
+        <module>card-application-service</module>
     </modules>
 
 </project>

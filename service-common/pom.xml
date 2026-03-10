@@ -16,6 +16,7 @@
 
     <modules>
         <module>common-domain-model</module>
+        <module>common-rest-api</module>
     </modules>
 
 </project>
