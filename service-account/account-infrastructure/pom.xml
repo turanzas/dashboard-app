@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>account-db-access</module>
+        <module>account-data-access</module>
         <module>account-messaging</module>
     </modules>
 
