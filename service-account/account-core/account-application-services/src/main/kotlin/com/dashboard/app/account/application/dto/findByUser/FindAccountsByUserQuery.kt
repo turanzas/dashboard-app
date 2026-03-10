@@ -1,4 +1,7 @@
 package com.dashboard.app.account.application.dto.findByUser
 
-class FindAccountsByUserQuery {
-}
+import java.util.*
+
+class FindAccountsByUserQuery (
+    val userId: UUID
+)

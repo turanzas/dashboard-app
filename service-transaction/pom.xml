@@ -16,6 +16,7 @@
 
     <modules>
         <module>transaction-core</module>
+        <module>transaction-user-interface</module>
     </modules>
 
 </project>

@@ -7,33 +7,26 @@
 
     <parent>
         <groupId>com.dashboard.app</groupId>
-        <artifactId>dashboard-app</artifactId>
+        <artifactId>card-user-interface</artifactId>
         <version>1.0</version>
     </parent>
 
-    <artifactId>account-rest-api</artifactId>
+    <artifactId>card-rest-api</artifactId>
 
     <dependencies>
         <!-- DASHBOARD APP -->
         <dependency>
             <groupId>com.dashboard.app</groupId>
-            <artifactId>account-application-services</artifactId>
+            <artifactId>card-application-service</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.dashboard.app</groupId>
-            <artifactId>common-rest-api</artifactId>
-        </dependency><!-- SPRING BOOT -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
+        <!-- SPRING BOOT -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
