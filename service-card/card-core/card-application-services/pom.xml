@@ -11,6 +11,6 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>card-application-service</artifactId>
+    <artifactId>card-application-services</artifactId>
 
 </project>

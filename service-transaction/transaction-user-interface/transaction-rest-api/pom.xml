@@ -14,11 +14,6 @@
     <artifactId>transaction-rest-api</artifactId>
 
     <dependencies>
-        <!-- DASHBOARD APP -->
-        <dependency>
-            <groupId>com.dashboard.app</groupId>
-            <artifactId>transaction-application-services</artifactId>
-        </dependency>
         <!-- SPRING BOOT -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

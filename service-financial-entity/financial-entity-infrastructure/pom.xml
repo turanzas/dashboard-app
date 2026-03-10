@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>financial-entity-db-access</module>
+        <module>financial-entity-data-access</module>
     </modules>
 
     <dependencies>

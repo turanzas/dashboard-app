@@ -11,14 +11,14 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>service-transaction</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>financial-entity-data-access</artifactId>
 
-    <modules>
-        <module>transaction-container</module>
-        <module>transaction-core</module>
-        <module>transaction-user-interface</module>
-        <module>transaction-infrastructure</module>
-    </modules>
+    <dependencies>
+        <!-- DASHBOARD-APP -->
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>financial-entity-application-services</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

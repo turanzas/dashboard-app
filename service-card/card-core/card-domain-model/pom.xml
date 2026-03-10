@@ -7,18 +7,10 @@
 
     <parent>
         <groupId>com.dashboard.app</groupId>
-        <artifactId>dashboard-app</artifactId>
+        <artifactId>card-core</artifactId>
         <version>1.0</version>
     </parent>
 
-    <artifactId>service-transaction</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>transaction-container</module>
-        <module>transaction-core</module>
-        <module>transaction-user-interface</module>
-        <module>transaction-infrastructure</module>
-    </modules>
+    <artifactId>card-domain-model</artifactId>
 
 </project>
