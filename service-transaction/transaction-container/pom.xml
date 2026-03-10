@@ -11,18 +11,29 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>transaction-user-interface</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>transaction-rest-api</module>
-    </modules>
+    <artifactId>transaction-container</artifactId>
 
     <dependencies>
         <!-- DASHBOARD APP -->
         <dependency>
             <groupId>com.dashboard.app</groupId>
+            <artifactId>transaction-rest-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
             <artifactId>transaction-application-services</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>transaction-domain-services</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>transaction-domain-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>transaction-data-access</artifactId>
         </dependency>
     </dependencies>
 

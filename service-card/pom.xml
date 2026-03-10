@@ -16,6 +16,8 @@
     <modules>
         <module>card-core</module>
         <module>card-user-interface</module>
+        <module>card-container</module>
+        <module>card-infrastructure</module>
     </modules>
 
 </project>

@@ -15,7 +15,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>card-application-service</module>
+        <module>card-application-services</module>
+        <module>card-domain-model</module>
+        <module>card-domain-services</module>
     </modules>
 
 </project>

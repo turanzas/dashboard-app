@@ -161,7 +161,17 @@
             <!-- SERVICE-CARD -->
             <dependency>
                 <groupId>com.dashboard.app</groupId>
-                <artifactId>card-application-service</artifactId>
+                <artifactId>card-rest-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>card-application-services</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>card-domain-services</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -171,7 +181,7 @@
             </dependency>
             <dependency>
                 <groupId>com.dashboard.app</groupId>
-                <artifactId>card-rest-api</artifactId>
+                <artifactId>card-data-access</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- SERVICE-COMMON -->
@@ -184,7 +194,13 @@
                 <groupId>com.dashboard.app</groupId>
                 <artifactId>common-rest-api</artifactId>
                 <version>${project.version}</version>
-            </dependency><!-- SERVICE-FINANCIAL-ENTITY -->
+            </dependency>
+            <!-- SERVICE-FINANCIAL-ENTITY -->
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>financial-entity-rest-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.dashboard.app</groupId>
                 <artifactId>financial-entity-application-services</artifactId>
@@ -202,15 +218,15 @@
             </dependency>
             <dependency>
                 <groupId>com.dashboard.app</groupId>
-                <artifactId>financial-entity-db-access</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.dashboard.app</groupId>
-                <artifactId>financial-entity-rest-api</artifactId>
+                <artifactId>financial-entity-data-access</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- SERVICE-TRANSACTION -->
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>transaction-rest-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.dashboard.app</groupId>
                 <artifactId>transaction-application-services</artifactId>
@@ -228,7 +244,7 @@
             </dependency>
             <dependency>
                 <groupId>com.dashboard.app</groupId>
-                <artifactId>transaction-rest-api</artifactId>
+                <artifactId>transaction-data-access</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

@@ -33,7 +33,7 @@
         </dependency>
         <dependency>
             <groupId>com.dashboard.app</groupId>
-            <artifactId>financial-entity-db-access</artifactId>
+            <artifactId>financial-entity-data-access</artifactId>
         </dependency>
         <!-- SPRING BOOT -->
         <dependency>

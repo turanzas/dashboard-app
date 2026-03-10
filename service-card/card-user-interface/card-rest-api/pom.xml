@@ -17,7 +17,7 @@
         <!-- DASHBOARD APP -->
         <dependency>
             <groupId>com.dashboard.app</groupId>
-            <artifactId>card-application-service</artifactId>
+            <artifactId>card-application-services</artifactId>
         </dependency>
         <!-- SPRING BOOT -->
         <dependency>
