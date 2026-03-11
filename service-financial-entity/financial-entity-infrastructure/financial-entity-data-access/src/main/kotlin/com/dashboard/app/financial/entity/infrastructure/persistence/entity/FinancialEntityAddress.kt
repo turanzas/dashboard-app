@@ -1,4 +1,4 @@
-package com.dashboard.app.financial.entity.infrastructure.peristence.entity
+package com.dashboard.app.financial.entity.infrastructure.persistence.entity
 
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Entity
@@ -13,7 +13,7 @@ import java.util.UUID
 data class FinancialEntityAddress(
     @Id val id: UUID,
     @OneToOne(cascade= [CascadeType.ALL]) @JoinColumn("id")
-    val financialEntity: FinancialEntity,
+    val financialEntity: FinancialEntityEntity,
     val street: String,
     val city: String,
     val state: String,

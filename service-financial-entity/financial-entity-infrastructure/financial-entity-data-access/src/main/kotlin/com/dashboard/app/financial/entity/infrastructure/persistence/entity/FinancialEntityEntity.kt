@@ -1,4 +1,4 @@
-package com.dashboard.app.financial.entity.infrastructure.peristence.entity
+package com.dashboard.app.financial.entity.infrastructure.persistence.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
@@ -8,7 +8,7 @@ import java.util.UUID
 
 @Entity
 @Table(name = "financial_entity")
-data class FinancialEntity(
+data class FinancialEntityEntity(
     @Id val id: UUID,
     val name: String,
     @OneToOne(mappedBy = "financialEntity")
@@ -17,7 +17,7 @@ data class FinancialEntity(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is FinancialEntity) return false
+        if (other !is FinancialEntityEntity) return false
         if (id != other.id) return false
         return true
     }

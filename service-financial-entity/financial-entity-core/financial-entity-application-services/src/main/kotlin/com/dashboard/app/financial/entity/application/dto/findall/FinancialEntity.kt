@@ -1,4 +1,8 @@
 package com.dashboard.app.financial.entity.application.dto.findall
 
-class FinancialEntity {
-}
+import java.util.UUID
+
+class FinancialEntity(
+    val id: UUID,
+    val name: String
+)
