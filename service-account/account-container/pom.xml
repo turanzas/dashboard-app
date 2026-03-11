@@ -33,7 +33,7 @@
         </dependency>
         <dependency>
             <groupId>com.dashboard.app</groupId>
-            <artifactId>account-db-access</artifactId>
+            <artifactId>account-data-access</artifactId>
         </dependency>
         <dependency>
             <groupId>com.dashboard.app</groupId>

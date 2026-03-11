@@ -150,7 +150,7 @@
             </dependency>
             <dependency>
                 <groupId>com.dashboard.app</groupId>
-                <artifactId>account-db-access</artifactId>
+                <artifactId>account-data-access</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
