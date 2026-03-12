@@ -7,7 +7,7 @@
 
     <parent>
         <groupId>com.dashboard.app</groupId>
-        <artifactId>server-kafka</artifactId>
+        <artifactId>dashboard-app</artifactId>
         <version>1.0</version>
     </parent>
 
