@@ -1,6 +1,8 @@
 spring:
+
   config:
     import: "optional:configserver:"
+
   cloud:
     config:
       enabled: false
@@ -8,11 +10,14 @@ spring:
         enabled: false
     discovery:
       enabled: false
-  mvc:
-    apiversion:
-      default: v1
-      use:
-        header: api-version
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
 
 eureka:
   instance:

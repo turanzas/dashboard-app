@@ -8,7 +8,7 @@ import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 import java.util.UUID
 
-@Entity
+//@Entity
 @Table(name = "financial_entity_address")
 data class FinancialEntityAddress(
     @Id val id: UUID,

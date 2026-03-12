@@ -42,6 +42,9 @@
         <kotlin-logging.version>7.0.3</kotlin-logging.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <springdoc-openapi-starter-webmvc-ui.version>3.0.2</springdoc-openapi-starter-webmvc-ui.version>
+        <testcontainer-postgresql.version>2.0.3</testcontainer-postgresql.version>
+        <kafka-avro.version>1.12.1</kafka-avro.version>
+        <kafka-avro-serializer.version>8.1.1</kafka-avro-serializer.version>
     </properties>
 
     <repositories>
@@ -53,11 +56,15 @@
             <id>spring-repo</id>
             <url>https://repo.spring.io/release</url>
         </repository>
+        <repository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
     </repositories>
 
     <dependencyManagement>
         <dependencies>
-            <!-- SPRING-CLOUD -->
+            <!-- BOMs -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -72,6 +79,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- SPRING -->
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -127,6 +135,41 @@
                 <artifactId>kafka-producer</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <!-- KAFKA -->
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>${spring-kafka.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-avro-serializer</artifactId>
+                <version>${kafka-avro-serializer.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-annotations</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-core</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro</artifactId>
+                <version>${kafka-avro.version}</version>
+            </dependency>
+            <!-- TODO https://github.com/avro-kotlin/avro4k -->
             <!-- SERVICE-ACCOUNT -->
             <dependency>
                 <groupId>com.dashboard.app</groupId>
@@ -221,6 +264,11 @@
                 <artifactId>financial-entity-data-access</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>financial-entity-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- SERVICE-TRANSACTION -->
             <dependency>
                 <groupId>com.dashboard.app</groupId>
@@ -277,8 +325,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
+            <groupId>com.ninja-squad</groupId>
+            <artifactId>springmockk</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

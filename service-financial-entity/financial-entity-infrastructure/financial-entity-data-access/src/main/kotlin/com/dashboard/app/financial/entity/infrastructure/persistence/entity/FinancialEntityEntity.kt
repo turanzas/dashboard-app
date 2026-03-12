@@ -2,17 +2,16 @@ package com.dashboard.app.financial.entity.infrastructure.persistence.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
-import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
-import java.util.UUID
+import java.util.*
 
 @Entity
 @Table(name = "financial_entity")
-data class FinancialEntityEntity(
-    @Id val id: UUID,
-    val name: String,
-    @OneToOne(mappedBy = "financialEntity")
-    val address: FinancialEntityAddress,
+class FinancialEntityEntity(
+    @Id var id: UUID,
+    var name: String,
+//    @OneToOne(mappedBy = "financialEntity")
+//    var address: FinancialEntityAddress,
 ) {
 
     override fun equals(other: Any?): Boolean {
