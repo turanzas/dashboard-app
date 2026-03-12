@@ -7,12 +7,12 @@ import jakarta.persistence.Table
 import java.util.UUID
 
 @Entity
-@Table(name = "financial_entity")
+@Table(name = "financial-entity")
 class FinancialEntityEntity(
     @Id var id: UUID,
     var name: String,
-    @OneToOne(mappedBy = "financialEntity")
-    var address: FinancialEntityAddress,
+//    @OneToOne(mappedBy = "financialEntity")
+//    var address: FinancialEntityAddress,
 ) {
 
     override fun equals(other: Any?): Boolean {
