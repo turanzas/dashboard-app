@@ -2,7 +2,7 @@ DROP SCHEMA IF EXISTS financial_entity CASCADE;
 
 CREATE SCHEMA financial_entity;
 
-CREATE EXTENSION IF NOT EXISTS 'uuid-ossp';
+CREATE EXTENSION IF NOT EXISTS uuid_ossp;
 
 DROP TYPE IF EXISTS financial_entity_status;
 
