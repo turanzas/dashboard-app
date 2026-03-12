@@ -4,8 +4,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-@ConfigurationProperties(prefix = "financial-entity-application-service")
+@ConfigurationProperties(prefix = "financial-entity-service")
 class FinancialEntityApplicationServiceConfigData(
     var financialEntityCreatedTopicName: String = "",
-    var financialEntityStatusUpdatedTopicName: String = "",
+    var financialEntityUpdatedTopicName: String = "",
 )

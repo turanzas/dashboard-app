@@ -1,6 +1,7 @@
 package com.dashboard.app.financial.entity.domain.model.entity
 
 import com.dashboard.app.common.domain.model.valueobject.FinancialEntityId
+import com.dashboard.app.common.domain.model.valueobject.FinancialEntityStatus
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -8,6 +9,7 @@ import kotlin.test.Test
 
 val ID = FinancialEntityId.random()
 val NAME = "Test Financial Entity"
+val STATUS = FinancialEntityStatus.ACTIVE
 
 class FinancialEntityTest {
 
@@ -22,7 +24,7 @@ class FinancialEntityTest {
             @Test
             fun `should create a FinancialEntity with given id`() {
                 // when
-                val entity = FinancialEntity(ID, NAME)
+                val entity = FinancialEntity(ID, NAME, STATUS)
 
                 // then
                 assertThat(entity.id).isEqualTo(ID)
@@ -31,10 +33,19 @@ class FinancialEntityTest {
             @Test
             fun `should create a FinancialEntity with valid name`() {
                 // when
-                val entity = FinancialEntity(ID, NAME)
+                val entity = FinancialEntity(ID, NAME, STATUS)
 
                 // then
                 assertThat(entity.name).isEqualTo(NAME)
+            }
+
+            @Test
+            fun `should create a FinancialEntity with valid status`() {
+                // when
+                val entity = FinancialEntity(ID, NAME, STATUS)
+
+                // then
+                assertThat(entity.status).isEqualTo(STATUS)
             }
 
         }
@@ -50,6 +61,7 @@ class FinancialEntityTest {
 
                 // then
                 assertThat(entity.name).isEqualTo(NAME)
+                assertThat(entity.status).isEqualTo(FinancialEntityStatus.ACTIVE)
             }
 
         }
