@@ -12,6 +12,6 @@ class TestContainersConfiguration {
     @ServiceConnection
     fun postgresContainer(): PostgreSQLContainer =
         PostgreSQLContainer("postgres:latest")
-            .withInitScripts("init-schema.sql", "init-data.sql")
+            .withInitScripts("init-schema.sql")
 
 }
