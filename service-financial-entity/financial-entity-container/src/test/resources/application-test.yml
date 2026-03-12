@@ -18,10 +18,6 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
-  datasource:
-    initialization-mode: always
-    schema: classpath:init-schema.sql
-    data: classpath:init-data.sql
 
 eureka:
   instance:

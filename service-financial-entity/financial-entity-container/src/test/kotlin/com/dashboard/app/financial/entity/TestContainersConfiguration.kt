@@ -10,6 +10,8 @@ class TestContainersConfiguration {
 
     @Bean
     @ServiceConnection
-    fun postgresContainer(): PostgreSQLContainer<*> = PostgreSQLContainer("postgres:latest")
+    fun postgresContainer(): PostgreSQLContainer<*> =
+        PostgreSQLContainer("postgres:latest")
+            .withInitScripts("init-schema.sql", "init-data.sql")
 
 }
