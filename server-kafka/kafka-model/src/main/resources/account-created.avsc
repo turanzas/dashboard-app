@@ -1,0 +1,23 @@
+{
+    "namespace": "com.dashboard.app.kafka.account.avro.model",
+    "type": "record",
+    "name": "AccountCreatedAvroModel",
+    "fields": [
+        {
+            "name": "id",
+            "type": {
+                "type": "string",
+                "logicalType": "uuid"
+            }
+        },
+        {
+            "name": "initialBalance",
+            "type": {
+                "type": "bytes",
+                "logicalType": "decimal",
+                "precision": 10,
+                "scale": 2
+            }
+        }
+    ]
+}

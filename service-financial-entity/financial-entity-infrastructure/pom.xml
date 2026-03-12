@@ -16,6 +16,7 @@
 
     <modules>
         <module>financial-entity-data-access</module>
+        <module>financial-entity-messaging</module>
     </modules>
 
     <dependencies>

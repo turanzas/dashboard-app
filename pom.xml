@@ -42,6 +42,7 @@
         <kotlin-logging.version>7.0.3</kotlin-logging.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <springdoc-openapi-starter-webmvc-ui.version>3.0.2</springdoc-openapi-starter-webmvc-ui.version>
+        <testcontainer-postgresql.version>1.21.4</testcontainer-postgresql.version>
     </properties>
 
     <repositories>
@@ -57,7 +58,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- SPRING-CLOUD -->
+            <!-- BOMs -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -72,6 +73,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- SPRING -->
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -221,6 +223,11 @@
                 <artifactId>financial-entity-data-access</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.dashboard.app</groupId>
+                <artifactId>financial-entity-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- SERVICE-TRANSACTION -->
             <dependency>
                 <groupId>com.dashboard.app</groupId>
@@ -277,8 +284,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
+            <groupId>com.ninja-squad</groupId>
+            <artifactId>springmockk</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

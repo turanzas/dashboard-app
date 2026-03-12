@@ -1,0 +1,14 @@
+{
+    "namespace": "com.dashboard.app.kafka.account.avro.model",
+    "type": "record",
+    "name": "FinancialEntityCreatedAvroModel",
+    "fields": [
+        {
+            "name": "id",
+            "type": {
+                "type": "string",
+                "logicalType": "uuid"
+            }
+        }
+    ]
+}

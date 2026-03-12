@@ -8,11 +8,11 @@ import java.util.UUID
 
 @Entity
 @Table(name = "financial_entity")
-data class FinancialEntityEntity(
-    @Id val id: UUID,
-    val name: String,
+class FinancialEntityEntity(
+    @Id var id: UUID,
+    var name: String,
     @OneToOne(mappedBy = "financialEntity")
-    val address: FinancialEntityAddress,
+    var address: FinancialEntityAddress,
 ) {
 
     override fun equals(other: Any?): Boolean {
