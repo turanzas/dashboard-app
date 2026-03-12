@@ -22,13 +22,14 @@ class FinancialEntityCreatedKafkaMessagePublisher(
 
     override fun publish(event: FinancialEntityCreatedEvent) {
         log.info { "Publishing financial entity created event with id: ${event.financialEntity.id}" }
-        val avroModel = financialEntityMessagingDataMapper.toMessage(event)
+        val avroModel = financialEntityMessagingDataMapper.toCreatedMessage(event)
         kafkaProducer.send(
             financialEntityApplicationServiceConfigData.financialEntityCreatedTopicName,
             event.financialEntity.id.value.toString(),
             avroModel,
             getKafkaCallback(financialEntityApplicationServiceConfigData.financialEntityCreatedTopicName, avroModel)
         )
+        log.info { "Message sent to Kafka for financial entity created event with id: ${event.financialEntity.id}" }
     }
 
     private fun getKafkaCallback(

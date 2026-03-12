@@ -2,6 +2,8 @@ package com.dashboard.app.financial.entity.domain.model.entity
 
 import com.dashboard.app.common.domain.model.entity.AggregateRoot
 import com.dashboard.app.common.domain.model.valueobject.FinancialEntityId
+import com.dashboard.app.common.domain.model.valueobject.FinancialEntityStatus
+import com.dashboard.app.common.domain.model.valueobject.FinancialEntityStatus.ACTIVE
 
 /**
  * Represents a financial entity with a unique identifier and a name.
@@ -12,7 +14,10 @@ import com.dashboard.app.common.domain.model.valueobject.FinancialEntityId
 class FinancialEntity(
     id: FinancialEntityId,
     var name: String,
+    private var currentStatus: FinancialEntityStatus
 ): AggregateRoot<FinancialEntityId>(id) {
+
+    val status get() = currentStatus
 
     companion object {
 
@@ -22,8 +27,22 @@ class FinancialEntity(
          * @param name The name of the financial entity.
          * @return A new instance of FinancialEntity with a unique identifier and the provided name.
          */
-        fun initialize(name: String) = FinancialEntity(FinancialEntityId.random(), name)
+        fun initialize(name: String) = FinancialEntity(FinancialEntityId.random(), name, ACTIVE)
 
+    }
+
+    fun isActive(): Boolean = currentStatus == ACTIVE
+
+    fun activate(): Boolean {
+        val updated = currentStatus != ACTIVE
+        currentStatus = ACTIVE
+        return updated
+    }
+
+    fun deactivate(): Boolean {
+        val updated = currentStatus != ACTIVE
+        currentStatus = FinancialEntityStatus.INACTIVE
+        return updated
     }
 
     override fun toString(): String = "FinancialEntity(id='$id', name='$name')"

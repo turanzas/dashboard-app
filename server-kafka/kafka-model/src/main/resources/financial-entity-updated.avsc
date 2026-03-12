@@ -1,0 +1,22 @@
+{
+    "namespace": "com.dashboard.app.kafka.account.avro.model",
+    "type": "record",
+    "name": "FinancialEntityUpdatedAvroModel",
+    "fields": [
+        {
+            "name": "id",
+            "type": {
+                "type": "string",
+                "logicalType": "uuid"
+            }
+        },
+        {
+          "name": "status",
+          "type": {
+            "type": "enum",
+            "name": "FinancialEntityStatus",
+            "symbols": ["ACTIVE", "INACTIVE"]
+          }
+        }
+    ]
+}
