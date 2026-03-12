@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration
 @ConfigurationProperties(prefix = "kafka-consumer-config")
 data class KafkaConsumerConfigData(
     var keyDeserializer: String = "",
-    var varueDeserializer: String = "",
+    var valueDeserializer: String = "",
     var autoOffsetReset: String = "",
     var specificAvroReaderKey: String = "",
     var specificAvroReader: String = "",
@@ -15,8 +15,8 @@ data class KafkaConsumerConfigData(
     var autoStartup: Boolean = false,
     var concurrencyLevel: Int = 0,
     var sessionTimeoutMs: Int = 0,
-    var heartbeatIntervarMs: Int = 0,
-    var maxPollIntervarMs: Int = 0,
+    var heartbeatIntervalMs: Int = 0,
+    var maxPollIntervalMs: Int = 0,
     var pollTimeoutMs: Long = 0,
     var maxPollRecords: Int = 0,
     var maxPartitionFetchBytesDefault: Int = 0,
