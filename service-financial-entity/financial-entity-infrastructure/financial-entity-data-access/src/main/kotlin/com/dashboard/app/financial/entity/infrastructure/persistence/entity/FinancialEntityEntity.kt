@@ -2,12 +2,11 @@ package com.dashboard.app.financial.entity.infrastructure.persistence.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
-import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
-import java.util.UUID
+import java.util.*
 
 @Entity
-@Table(name = "financial-entity")
+@Table(name = "financial_entity")
 class FinancialEntityEntity(
     @Id var id: UUID,
     var name: String,
