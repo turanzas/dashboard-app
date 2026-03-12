@@ -43,6 +43,8 @@
         <mapstruct.version>1.6.3</mapstruct.version>
         <springdoc-openapi-starter-webmvc-ui.version>3.0.2</springdoc-openapi-starter-webmvc-ui.version>
         <testcontainer-postgresql.version>1.21.4</testcontainer-postgresql.version>
+        <kafka-avro.version>1.12.1</kafka-avro.version>
+        <kafka-avro-serializer.version>8.1.1</kafka-avro-serializer.version>
     </properties>
 
     <repositories>
