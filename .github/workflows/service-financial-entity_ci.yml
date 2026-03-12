@@ -21,7 +21,7 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Build with Maven
-        run: mvn install -N && mvn install -f service-common -DskipTests && mvn install -f service-financial-entity -DskipTests
+        run: mvn install -N && mvn install -f service-common -DskipTests && mvn install -f server-kafka -DskipTests && mvn install -f service-financial-entity -DskipTests
   test:
     name: Unit Tests
     needs: [ build ]
