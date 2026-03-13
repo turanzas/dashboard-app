@@ -4,6 +4,6 @@ import org.apache.avro.specific.SpecificRecordBase
 
 fun interface KafkaConsumer<T> where T: SpecificRecordBase {
 
-    fun receive(messages: List<T>, keys: List<Long>, partitions: List<Int>, offsets: List<Long>)
+    fun receive(messages: List<T>, keys: List<String>, partitions: List<Int>, offsets: List<Long>)
 
 }

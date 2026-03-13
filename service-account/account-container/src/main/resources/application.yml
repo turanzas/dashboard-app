@@ -1,8 +1,6 @@
-financial-entity-service:
+account-service:
   financial-entity-created-topic-name: financial-entity-created
   financial-entity-updated-topic-name: financial-entity-updated
-
-account-service:
   account-created-topic-name: account-created
   account-updated-topic-name: account-updated
 

@@ -1,8 +1,8 @@
 package com.dashboard.app.account.infrastructure.messaging.kafka.listener
 
-import com.dashboard.app.account.application.port.input.message.FinancialEntityCreatedMessageListener
+import com.dashboard.app.account.application.port.input.message.FinancialEntityUpdatedMessageListener
 import com.dashboard.app.account.infrastructure.messaging.kafka.mapper.FinancialEntityMessagingDataMapper
-import com.dashboard.app.kafka.account.avro.model.FinancialEntityCreatedAvroModel
+import com.dashboard.app.kafka.account.avro.model.FinancialEntityUpdatedAvroModel
 import com.dashboard.app.kafka.consumer.service.KafkaConsumer
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.kafka.annotation.KafkaListener
@@ -14,27 +14,27 @@ import org.springframework.stereotype.Component
 private val log = KotlinLogging.logger {  }
 
 @Component
-class FinancialEntityCreatedKafkaListener(
-    val financialEntityCreatedMessageListener: FinancialEntityCreatedMessageListener,
+class FinancialEntityUpdatedKafkaListener(
+    val financialEntityUpdatedMessageListener: FinancialEntityUpdatedMessageListener,
     val financialEntityMessagingDataMapper: FinancialEntityMessagingDataMapper,
-): KafkaConsumer<FinancialEntityCreatedAvroModel> {
+): KafkaConsumer<FinancialEntityUpdatedAvroModel> {
 
     @KafkaListener(
         id = "\${kafka-consumer-config.financial-entity-consumer-group-id}",
-        topics = ["\${financial-entity-service.financial-entity-created-topic-name}"],
+        topics = ["\${account-service.financial-entity-updated-topic-name}"],
     )
     override fun receive(
-        @Payload messages: List<FinancialEntityCreatedAvroModel>,
+        @Payload messages: List<FinancialEntityUpdatedAvroModel>,
         @Header(KafkaHeaders.RECEIVED_KEY) keys: List<String>,
         @Header(KafkaHeaders.RECEIVED_PARTITION) partitions: List<Int>,
         @Header(KafkaHeaders.OFFSET) offsets: List<Long>
     ) {
-        log.info { "Received ${messages.size} financial entity created messages with keys: $keys, partitions: $partitions, offsets: $offsets" }
+        log.info { "Received ${messages.size} financial entity updated messages with keys: $keys, partitions: $partitions, offsets: $offsets" }
 
-        messages.forEach { financialEntityCreatedAvroModel ->
-            log.info { "Processing financial entity created message with key: ${financialEntityCreatedAvroModel.id}" }
-            val financialEntity = financialEntityMessagingDataMapper.toCreatedApplication(financialEntityCreatedAvroModel)
-            financialEntityCreatedMessageListener.process(financialEntity)
+        messages.forEach { financialEntityUpdatedAvroModel ->
+            log.info { "Processing financial entity updated message with key: ${financialEntityUpdatedAvroModel.id}" }
+            val financialEntity = financialEntityMessagingDataMapper.toUpdatedApplication(financialEntityUpdatedAvroModel)
+            financialEntityUpdatedMessageListener.process(financialEntity)
         }
     }
 
