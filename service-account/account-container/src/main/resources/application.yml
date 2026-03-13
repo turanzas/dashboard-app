@@ -1,3 +1,45 @@
+spring:
+
+  application:
+    name: financial-entity-service
+
+  config:
+    import: "optional:configserver:"
+
+  mvc:
+    apiversion:
+      default: v1
+      use:
+        header: api-version
+  jpa:
+    # Forces the persistence context to stay open. So that the view layer can trigger the proxy initialization.
+    # This will keep a database connection open for a long time which would have terrible effects on database performance.
+    open-in-view: false
+    # Show each SQL on the locks which is good for debug purposes.
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  datasource:
+    # The binaryTransfer, reWriteBatchedInserts and stringtype parameters are added to optimize the performance of batch inserts and updates.
+    # For more details, see https://jdbc.postgresql.org/documentation/head/performance.html#batch-performance.
+    # With binaryTransfer parameter the data will be transferred from Postgres server to JDBC driver in Binary form.
+    # So it'll be transferred faster as this will eliminate the need for conversion like converting a number from their text representation to their Binary representation.
+    # With reWriteBatchedInserts parameter the JDBC driver will rewrite the batch inserts into a single insert statement with multiple values.
+    # This can significantly improve the performance of batch inserts as it reduces the number of round trips to the database.
+    # With stringtype=unspecified parameter the JDBC driver will send all string parameters as String type instead of trying to guess the type based on the value.
+    # This prevents for example checking on UUID types which can be time-consuming and can lead to performance issues.
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=account&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+    platform: postgres
+
+  profiles:
+    default: dev
+
 account-service:
   financial-entity-created-topic-name: financial-entity-created
   financial-entity-updated-topic-name: financial-entity-updated
