@@ -39,6 +39,11 @@
             <groupId>com.dashboard.app</groupId>
             <artifactId>account-messaging</artifactId>
         </dependency>
+        <!-- SPRING BOOT -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
