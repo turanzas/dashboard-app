@@ -9,4 +9,5 @@ package com.dashboard.app.common.domain.model.valueobject
 enum class CardStatus {
     ACTIVE,
     INACTIVE,
+    CANCELLED,
 }
