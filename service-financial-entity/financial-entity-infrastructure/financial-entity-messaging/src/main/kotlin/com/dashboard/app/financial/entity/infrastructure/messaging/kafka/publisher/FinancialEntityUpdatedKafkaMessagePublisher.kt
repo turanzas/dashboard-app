@@ -7,8 +7,10 @@ import com.dashboard.app.financial.entity.infrastructure.messaging.kafka.mapper.
 import com.dashboard.app.kafka.account.avro.model.FinancialEntityUpdatedAvroModel
 import com.dashboard.app.kafka.producer.service.KafkaProducer
 import org.springframework.kafka.support.SendResult
+import org.springframework.stereotype.Component
 import java.util.concurrent.CompletableFuture
 
+@Component
 class FinancialEntityUpdatedKafkaMessagePublisher(
     val financialEntityMessagingDataMapper: FinancialEntityMessagingDataMapper,
     val financialEntityApplicationServiceConfigData: FinancialEntityApplicationServiceConfigData,

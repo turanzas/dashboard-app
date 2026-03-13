@@ -19,6 +19,14 @@
             <groupId>com.dashboard.app</groupId>
             <artifactId>account-application-services</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>kafka-consumer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dashboard.app</groupId>
+            <artifactId>kafka-model</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
